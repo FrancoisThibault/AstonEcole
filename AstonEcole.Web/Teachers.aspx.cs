@@ -12,7 +12,7 @@ namespace AstonEcole.Web
 {
     public partial class Teachers : System.Web.UI.Page
     {
-        private AstonEcoleApiClient _Client = new AstonEcoleApiClient();
+        private AstonApiClient _Client = new AstonApiClient();
 
         protected override void OnPreRender(EventArgs e)
         {

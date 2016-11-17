@@ -14,7 +14,7 @@ namespace AstonEcole.ConsoleIhm
     {
         static void Main(string[] args)
         {
-            var svc = new AstonEcoleApiClient();
+            var svc = new AstonApiClient();
             //Student myriam = svc.GetStudent(3);
             //myriam.FirstName = "Philippe"; // { François }
             //myriam.FirstName = "Marswell2"; // { Mario }
