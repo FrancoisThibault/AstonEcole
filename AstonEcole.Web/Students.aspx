@@ -10,6 +10,17 @@
 <body>
     <form id="form1" runat="server">
     <div>
+
+        <asp:GridView ID="GridViewStudents" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewStudents_SelectedIndexChanged" OnPreRender="GridViewStudents_PreRender">
+            <Columns>
+                 <asp:BoundField HeaderText="Id Student" DataField="Id" />
+                <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
+                <asp:BoundField HeaderText="Nombre Elèves" DataField="NbCours" />
+                                
+                <asp:CommandField  SelectText="Voir" ShowSelectButton="true" /> 
+                
+            </Columns>
+        </asp:GridView>
     
     </div>
     </form>

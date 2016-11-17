@@ -15,12 +15,13 @@ using System.Web.UI;
 
 namespace AstonEcole.ApiClient
 {
-    public class AstonEcoleApiClient
+    public class AstonEcoleApiClient : IDisposable
     {
-        private HttpClient astonSvc = new HttpClient();
+        private HttpClient astonSvc;
 
         public AstonEcoleApiClient()
         {
+            astonSvc = new HttpClient();
             astonSvc.BaseAddress = new Uri("http://localhost:56089/");
             astonSvc.DefaultRequestHeaders.Clear();
             astonSvc.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -97,6 +98,11 @@ namespace AstonEcole.ApiClient
         #endregion
 
 
+        public List<Student> GetStudents()
+        {
+            return GetAsync<List<Student>>($"api/Students/");
+        }
+
         private TResult GetAsync<TResult>(string api)
             where TResult: class, new()
         {
@@ -107,6 +113,14 @@ namespace AstonEcole.ApiClient
             JavaScriptSerializer sera = new JavaScriptSerializer();
             TResult result = sera.Deserialize<TResult>(x);
             return result;
+        }
+
+        public void Dispose()
+        {
+            if (astonSvc != null)
+            {
+                astonSvc.Dispose();
+            }
         }
     }
 }
