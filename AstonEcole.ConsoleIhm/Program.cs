@@ -16,7 +16,7 @@ namespace AstonEcole.ConsoleIhm
         {
             var svc = new AstonEcoleApiClient();
             Student myriam = svc.GetStudent(3);
-            myriam.FirstName = "Myriam";
+            myriam.FirstName = "Philippe";
             svc.UpdateStudent(myriam);
             myriam = svc.GetStudent(3);
             Console.WriteLine(myriam.FirstName);
