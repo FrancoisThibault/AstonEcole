@@ -1,45 +1,28 @@
 ﻿using AstonEcole.DTO;
 using AstonEcole.Services;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Web.UI;
-
 
 namespace AstonEcole.ApiClient
 {
-    public class AstonEcoleApiClient : IDisposable
+    public class AstonApiClientTeacher : AstonApiClient
     {
-        private HttpClient astonSvc;
 
-        public AstonEcoleApiClient()
+        public async Task<Teacher> getTeacher(int id)
         {
-            astonSvc = new HttpClient();
-            astonSvc.BaseAddress = new Uri("http://localhost:56089/");
-            astonSvc.DefaultRequestHeaders.Clear();
-            astonSvc.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+            Teacher teacher = null;
+            HttpResponseMessage response = await astonSvc.GetAsync($"api/Teachers/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                teacher = await response.Content.ReadAsAsync<Teacher>();
+            }
 
-        public void UpdateStudent(Student student)
-        {
-            astonSvc.PutAsJsonAsync<Student>($"api/Students/{student.Id}", student).Wait();
-        }
-
-        public Student GetStudent(int id)
-        {
-            return GetAsync<Student>($"api/Students/{id}");
-        }
-
-        public Teacher getTeacher(int id)
-        {
-            return GetAsync<Teacher>($"api/Teachers/{id}");
+            return teacher;
         }
 
         public async Task<List<Teacher>> getTeachers()
@@ -88,7 +71,17 @@ namespace AstonEcole.ApiClient
 
         public void UpdateCourse(Course cours) // { Mise à jour des cours }
         {
-            astonSvc.PutAsJsonAsync<Course>($"api/Students/{cours.Id}", cours).Wait();
+            astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        }
+
+        public void AddCourse(Course cours) // { Ajout de cours }
+        {
+            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        }
+
+        public void DeleteCourse(int id) // { Suppression de cours }
+        {
+            astonSvc.DeleteAsync($"api/Courses/{id}");
         }
         #endregion
 
@@ -98,24 +91,5 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<Student>>($"api/Students/");
         }
 
-        private TResult GetAsync<TResult>(string api)
-            where TResult: class, new()
-        {
-            Task<HttpResponseMessage> response = astonSvc.GetAsync(api);
-
-            var x = response.Result.Content.ReadAsStringAsync().Result;
-
-            JavaScriptSerializer sera = new JavaScriptSerializer();
-            TResult result = sera.Deserialize<TResult>(x);
-            return result;
-        }
-
-        public void Dispose()
-        {
-            if (astonSvc != null)
-            {
-                astonSvc.Dispose();
-            }
-        }
     }
 }

@@ -54,9 +54,20 @@ namespace AstonEcole.Services
                 .ForEach(id => selectedCourse.Students.Add(Context.Students.Single(s => s.Id == id)));
         }
 
-        public void SaveCourses(Course cours)
+        public void UpdateCourses(Course cours)
         {
             Context.Entry<Course>(cours).State = EntityState.Modified;
+        }
+
+        public void AddCourses(Course cours)
+        {
+            Context.Entry<Course>(cours).State = EntityState.Added;
+        }
+
+        public void DeleteCourses(int id)
+        {
+            Course cours = LoadCourse(id);
+            Context.Entry<Course>(cours).State = EntityState.Deleted;
         }
     }
 }

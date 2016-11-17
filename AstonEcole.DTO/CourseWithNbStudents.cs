@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AstonEcole.Services
+namespace AstonEcole.DTO
 {
     public class CourseWithNbStudents
     {

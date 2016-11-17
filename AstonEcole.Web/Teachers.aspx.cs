@@ -1,6 +1,6 @@
 ﻿using AstonEcole.ApiClient;
 using AstonEcole.DTO;
-using AstonEcole.Services;
+using AstonEcole.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +10,20 @@ using System.Web.UI.WebControls;
 
 namespace AstonEcole.Web
 {
-    public partial class Teachers : System.Web.UI.Page
+    public partial class Teachers : AstonPage
     {
-        private AstonEcoleApiClient _Client = new AstonEcoleApiClient();
+        private AstonApiClientTeacher _ClientTeacher;// = GetApiClient<AstonApiClientTeacher>(); // new AstonApiClientTeacher();
+        private AstonApiClientCourse _ClientCourse;// = new AstonApiClientCourse();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            _ClientTeacher = GetApiClient<AstonApiClientTeacher>();
+            _ClientCourse = GetApiClient<AstonApiClientCourse>();
+        }
 
         protected override void OnPreRender(EventArgs e)
         {
-            var teachers = _Client.getTeachers();
+            var teachers = _ClientTeacher.getTeachers();
 
             gridTeachers.DataSource = teachers;
             gridTeachers.DataBind();
@@ -27,16 +34,13 @@ namespace AstonEcole.Web
         protected void gridTeachers_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idSelectedTeacher = (int)gridTeachers.SelectedValue;
-            Teacher selectedTeacher = _Client.getTeacher(idSelectedTeacher);
+            Teacher selectedTeacher = _ClientTeacher.getTeacher(idSelectedTeacher).Result;
             hidTeacherId.Value = selectedTeacher.Id.ToString();
             txtTeacherName.Text = selectedTeacher.Name;
-            
 
-            using (CoursesServices svc = new CoursesServices())
-            {
-                gridCourses.DataSource = svc.LoadCourses().Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
-                gridCourses.DataBind();
-            }
+
+            gridCourses.DataSource = _ClientCourse.GetCourses().Result.Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
+            gridCourses.DataBind();
         }
 
         protected void gridCourses_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -54,9 +58,9 @@ namespace AstonEcole.Web
         protected void SaveTeacher_Click(object sender, EventArgs e)
         {
             int idUpdatingTeacher = int.Parse(hidTeacherId.Value);
-            using (TeacherServices svc = new TeacherServices())
+            
             {
-                Teacher updatingTeacher = svc.LoadTeacher(idUpdatingTeacher);
+                Teacher updatingTeacher = _ClientTeacher.getTeacher(idUpdatingTeacher).Result;
                 updatingTeacher.Name = txtTeacherName.Text;
                 List<int> selectedCourses = new List<int>();
                 foreach (GridViewRow row in gridCourses.Rows)
@@ -68,8 +72,8 @@ namespace AstonEcole.Web
                     }
                 }
 
-                svc.UpdateCourses(updatingTeacher, selectedCourses);
-                svc.Save();
+                /*_ClientCourse.UpdateCourse(updatingTeacher, selectedCourses);
+                _ClientCourse.Save();*/
             }
         }
     }
