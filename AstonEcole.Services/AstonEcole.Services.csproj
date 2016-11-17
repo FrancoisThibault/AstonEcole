@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CoursesServices.cs" />
     <Compile Include="CourseWithNbStudents.cs" />
+    <Compile Include="ExtensionCollection.cs" />
     <Compile Include="Infrastructure\BaseServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentsServices.cs" />
