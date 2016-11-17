@@ -10,9 +10,17 @@ using System.Web.Script.Serialization;
 
 namespace AstonEcole.ApiClient
 {
-    class AstonApiClientTeacher : AstonApiClient
+    public class AstonEcoleApiClient : IDisposable
     {
-        
+        private HttpClient astonSvc;
+
+        public AstonEcoleApiClient()
+        {
+            astonSvc = new HttpClient();
+            astonSvc.BaseAddress = new Uri("http://localhost:56089/");
+            astonSvc.DefaultRequestHeaders.Clear();
+            astonSvc.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
 
         public async Task<Teacher> getTeacher(int id)
         {
@@ -26,7 +34,6 @@ namespace AstonEcole.ApiClient
             return teacher;
         }
 
-
         public async Task<List<Teacher>> getTeachers()
         {
             List<Teacher> Teachers = null;
@@ -38,21 +45,6 @@ namespace AstonEcole.ApiClient
 
             return Teachers;
         }
-
-
-        public async Task<List<Course>> GetCourses() 
-        {
-            List<Course> Courses = null;
-            HttpResponseMessage response = await astonSvc.GetAsync("api/Courses");
-            if (response.IsSuccessStatusCode)
-            {
-                Courses = await response.Content.ReadAsAsync<List<Course>>();
-            }
-
-            return Courses;
-        }
-
-
 
         public async Task<IEnumerable<TeacherWithNbCourses>> LoadTeachersWithNbCourses()
         {
@@ -66,10 +58,66 @@ namespace AstonEcole.ApiClient
             return TeacherWithNbCour;
         }
 
+        #region 
+        /// <summary>
+        /// Region des Cours !
+        /// </summary>
+        /// <returns>GET, POST, PUT, DELETE</returns>
+        public List<Course> GetCourses() // { Renvoie la liste des cours }
+        {
+            return GetAsync<List<Course>>($"api/Courses");
+        }
 
-        
-    
+        public Course GetCourseById(int id) // { Envoie un cours en fonction de son Id }
+        {
+            return GetAsync<Course>($"api/Courses/{id}");
+        }
 
-   
-}
+        public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
+        {
+            return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
+        }
+
+        public void UpdateCourse(Course cours) // { Mise à jour des cours }
+        {
+            astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        }
+
+        public void AddCourse(Course cours) // { Ajout de cours }
+        {
+            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        }
+
+        public void DeleteCourse(int id) // { Suppression de cours }
+        {
+            astonSvc.DeleteAsync($"api/Courses/{id}");
+        }
+        #endregion
+
+
+        public List<Student> GetStudents()
+        {
+            return GetAsync<List<Student>>($"api/Students/");
+        }
+
+        private TResult GetAsync<TResult>(string api)
+            where TResult: class, new()
+        {
+            Task<HttpResponseMessage> response = astonSvc.GetAsync(api);
+
+            var x = response.Result.Content.ReadAsStringAsync().Result;
+
+            JavaScriptSerializer sera = new JavaScriptSerializer();
+            TResult result = sera.Deserialize<TResult>(x);
+            return result;
+        }
+
+        public void Dispose()
+        {
+            if (astonSvc != null)
+            {
+                astonSvc.Dispose();
+            }
+        }
+    }
 }

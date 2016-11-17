@@ -47,7 +47,27 @@ namespace AstonEcole.Api.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateStudent(int id, Course cours)
         {
-            Service.SaveCourses(cours);
+            Service.UpdateCourses(cours);
+            Service.Save();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostCourse(Course cours)
+        {
+            Service.AddCourses(cours);
+            Service.Save();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteCourse(int id)
+        {
+            Service.DeleteCourses(id);
             Service.Save();
 
             return Ok();
