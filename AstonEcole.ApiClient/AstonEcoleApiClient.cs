@@ -41,7 +41,6 @@ namespace AstonEcole.ApiClient
             return GetAsync<Teacher>($"api/Teachers/{id}");
         }
 
-
         public async Task<List<Teacher>> getTeachers()
         {
             List<Teacher> Teachers = null;
@@ -51,19 +50,8 @@ namespace AstonEcole.ApiClient
                 Teachers = await response.Content.ReadAsAsync<List<Teacher>>();
             }
 
-        #region 
-        /// <summary>
-        /// Region des Cours !
-        /// </summary>
-        /// <returns>GET, POST, PUT, DELETE</returns>
-        public List<Course> GetCourses() // { Renvoie la liste des cours }
-        {
-            return GetAsync<List<Course>>($"api/Courses");
+            return Teachers;
         }
-
-            return Teachers;    
-        }
-
 
         public async Task<IEnumerable<TeacherWithNbCourses>> LoadTeachersWithNbCourses()
         {
@@ -77,6 +65,15 @@ namespace AstonEcole.ApiClient
             return TeacherWithNbCour;
         }
 
+        #region 
+        /// <summary>
+        /// Region des Cours !
+        /// </summary>
+        /// <returns>GET, POST, PUT, DELETE</returns>
+        public List<Course> GetCourses() // { Renvoie la liste des cours }
+        {
+            return GetAsync<List<Course>>($"api/Courses");
+        }
 
         public Course GetCourseById(int id) // { Envoie un cours en fonction de son Id }
         {
@@ -88,11 +85,12 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
         }
 
-        public void UpdateCourse(Course cours)
+        public void UpdateCourse(Course cours) // { Mise à jour des cours }
         {
             astonSvc.PutAsJsonAsync<Course>($"api/Students/{cours.Id}", cours).Wait();
         }
         #endregion
+
 
         private TResult GetAsync<TResult>(string api)
             where TResult: class, new()
