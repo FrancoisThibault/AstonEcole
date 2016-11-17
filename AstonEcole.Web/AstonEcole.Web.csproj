@@ -241,6 +241,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AstonEcole.ApiClient\AstonEcole.ApiClient.csproj">
+      <Project>{F250AACF-F695-4728-AB39-03C075038189}</Project>
+      <Name>AstonEcole.ApiClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AstonEcole.DTO\AstonEcole.DTO.csproj">
       <Project>{37680ac6-bbbb-440e-80b2-283a5258c875}</Project>
       <Name>AstonEcole.DTO</Name>

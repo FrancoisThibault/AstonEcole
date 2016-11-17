@@ -57,6 +57,10 @@
       <Project>{37680ac6-bbbb-440e-80b2-283a5258c875}</Project>
       <Name>AstonEcole.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AstonEcole.Services\AstonEcole.Services.csproj">
+      <Project>{32A14243-2FE4-4664-BC92-EC1A29FEBA84}</Project>
+      <Name>AstonEcole.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
