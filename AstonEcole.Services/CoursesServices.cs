@@ -58,5 +58,10 @@ namespace AstonEcole.Services
         {
             Context.Entry<Course>(cours).State = EntityState.Modified;
         }
+
+        public void AddCourses(Course cours)
+        {
+            Context.Entry<Course>(cours).State = EntityState.Added;
+        }
     }
 }

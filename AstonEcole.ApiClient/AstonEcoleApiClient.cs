@@ -85,9 +85,14 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
         }
 
-        public void UpdateCourse(Course cours) // { Mise à jour des cours }
+        public void PutCourse(int id, Course cours) // { Mise à jour des cours }
         {
-            astonSvc.PutAsJsonAsync<Course>($"api/Students/{cours.Id}", cours).Wait();
+            astonSvc.PutAsJsonAsync<Course>($"api/Courses/{id}", cours).Wait();
+        }
+
+        public void PostCourse(Course cours) // { Ajout de cours }
+        {
+            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }
         #endregion
 
