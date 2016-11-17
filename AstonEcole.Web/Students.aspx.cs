@@ -6,7 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AstonEcole.Web.Infrastructure;
 using AstonEcole.DTO;
-using AstonEcole.Services;
+ 
+using AstonEcole.ApiClient;
 
 namespace AstonEcole.Web
 {
@@ -21,13 +22,17 @@ namespace AstonEcole.Web
         {
 
 
-            //List<Student> ListStudents =  astonApiClient.GetStudents();
-            //var listeStudents = ListStudents.ToList()
-            //   .Select(eleve => new { Id = eleve.Id, NomStudent = eleve.FirstName,
-            //       NbCours = (astonApiClient.GetStudent(eleve.Id)).Courses.Count() });
+            List<Student> ListStudents = GetApiClient<AstonApiClientStudent>().GetStudents().Result;
+            var listeStudents = ListStudents.ToList()
+               .Select(eleve => new
+               {
+                   Id = eleve.Id,
+                   NomStudent = eleve.FirstName,
+                   NbCours = (GetApiClient<AstonApiClientStudent>().GetStudent(eleve.Id)).Result.Courses.Count()
+               });
 
-            //GridViewStudents.DataSource = listeStudents;
-            //GridViewStudents.DataBind();
+            GridViewStudents.DataSource = listeStudents;
+            GridViewStudents.DataBind();
 
         }
 
@@ -35,11 +40,11 @@ namespace AstonEcole.Web
         {
             int idStudent = (int)GridViewStudents.SelectedValue;
 
-            Student SelectedStudent = astonApiClient.GetStudent(idStudent);
+            Student SelectedStudent = GetApiClient<AstonApiClientStudent>().GetStudent(idStudent).Result;
 
             this.TextBoxNomEleve.Text = SelectedStudent.FirstName;
 
-            var query = astonApiClient.GetCourses().Select(cours => new { Id = cours.Id, Subject = cours.Subject,
+            var query = GetApiClient<AstonApiClientCourse>().GetCourses().Result.Select(cours => new { Id = cours.Id, Subject = cours.Subject,
                 Assiste = SelectedStudent.Courses.Any(c => c.Id == cours.Id) });
 
 
@@ -57,7 +62,7 @@ namespace AstonEcole.Web
             }
         }
 
-        protected void ButtonValider_Click(object sender, EventArgs e)
+        protected async void ButtonValider_Click(object sender, EventArgs e)
         {
 
             int idStudent = (int)GridViewStudents.SelectedValue;
@@ -79,16 +84,16 @@ namespace AstonEcole.Web
             }
 
             //mettre a jour les cours de l'étudiant sélectionné
-            Student SelectedStudent = astonApiClient.GetStudent(idStudent);
+            Student SelectedStudent = GetApiClient<AstonApiClientStudent>().GetStudent(idStudent).Result;
 
-            List<Course> listAllCourses = astonApiClient.GetCourses();
+            List<Course> listAllCourses = GetApiClient<AstonApiClientCourse>().GetCourses().Result;
 
             SelectedStudent.Courses = listAllCourses.Where(c => listIdCoursSelectionnes.Contains(c.Id)).ToList();
 
-            astonApiClient.UpdateStudent(SelectedStudent);
-           
+            await GetApiClient<AstonApiClientStudent>().UpdateStudent(SelectedStudent);
 
-         
+
+
         }
 
     }
