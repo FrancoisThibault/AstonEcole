@@ -63,16 +63,22 @@ namespace AstonEcole.ApiClient
             astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }
 
-        public void AddCourse(Course cours) // { Ajout de cours }
+        public async Task<Course> AddCourse(Course cours) // { Ajout de cours }
         {
-            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+            Course AddEleve = null;
+            HttpResponseMessage response = await astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours);
+            if (response.IsSuccessStatusCode)
+            {
+                AddEleve = await response.Content.ReadAsAsync<Course>();
+            }
+
+            return AddEleve;
         }
 
         public void DeleteCourse(int id) // { Suppression de cours }
         {
             astonSvc.DeleteAsync($"api/Courses/{id}");
         }
-
 
 
         #region 
