@@ -1,5 +1,6 @@
 ﻿using AstonEcole.DTO;
 using AstonEcole.Services;
+using AstonEcole.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace AstonEcole.Web
 {
-    public partial class Courses : System.Web.UI.Page
+    public partial class Courses : AstonPage
     {
         protected override void OnPreRender(EventArgs e)
         {
