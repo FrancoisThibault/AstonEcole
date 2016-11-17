@@ -8,26 +8,24 @@ namespace AstonEcole.Web.Infrastructure
 {
     public abstract  class AstonPage : System.Web.UI.Page
     {
-        protected AstonApiClient astonApiClient { get; private set; }
+        private Dictionary<Type, AstonApiClient> _services = new Dictionary<Type, AstonApiClient>();
 
-        protected AstonPage()
+        protected T GetApiClient<T>()
+            where T : AstonApiClient, new()
         {
-            astonApiClient = new AstonApiClient();
-        }
+            if (!_services.ContainsKey(typeof(T)))
+            {
+                _services.Add(typeof(T), new T());
+            }
 
-        // affecte le champ client Api de notre page avec le client api de la page en paramètre
-        protected AstonPage(AstonPage otherService)
-        {
-            astonApiClient = otherService.astonApiClient;
+            return (T) _services[typeof(T)];
         }
-             
 
         public override void Dispose()
         {
-            if (astonApiClient != null)
-            {
-                astonApiClient.Dispose();
-            }
+
+            _services.Values.ToList().ForEach(apiClient => apiClient.Dispose());
+
             base.Dispose();
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AstonEcole.ApiClient
 {
-    public class AstonApiClientSudent : AstonApiClient
+    public class AstonApiClientStudent : AstonApiClient
     {
         
 

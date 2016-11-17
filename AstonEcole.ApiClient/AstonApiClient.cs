@@ -15,7 +15,7 @@ using System.Web.UI;
 
 namespace AstonEcole.ApiClient
 {
-    public class AstonApiClient : IDisposable
+    public abstract class AstonApiClient : IDisposable
     {
         protected HttpClient astonSvc { get; private set; }
 

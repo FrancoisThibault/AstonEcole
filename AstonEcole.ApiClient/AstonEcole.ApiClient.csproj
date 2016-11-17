@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="AstonApiClient.cs" />
     <Compile Include="AstonApiClientCourse.cs" />
-    <Compile Include="AstonApiClientSudent.cs" />
+    <Compile Include="AstonApiClientStudent.cs" />
     <Compile Include="AstonApiClientTeacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
