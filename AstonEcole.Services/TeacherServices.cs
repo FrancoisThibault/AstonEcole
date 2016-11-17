@@ -39,8 +39,8 @@ namespace AstonEcole.Services
         {
             return Context.Teachers.GroupJoin(
                 Context.Courses,
-                t => t.Id, 
-                c => c.Teacher.Id, 
+                t => t.Id,
+                c => c.Teacher.Id,
                 (tdd, cs) => new TeacherWithNbCourses() { Teacher = tdd, NbCourses = cs.Count() });
         }
 
@@ -57,5 +57,9 @@ namespace AstonEcole.Services
             selectedCourses.Where(id => !teacher.Courses.Any(c => c.Id == id)).ToList()
                 .ForEach(id => teacher.Courses.Add(Context.Courses.Single(c => c.Id == id)));
         }
+
+
+
+
     }
 }

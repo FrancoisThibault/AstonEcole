@@ -13,7 +13,6 @@
             <asp:GridView ID="gridTeachers" runat="server" AutoGenerateColumns="False" DataKeyNames="TeacherId" OnSelectedIndexChanged="gridTeachers_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField HeaderText="Nom" DataField="TeacherName" />
-                    <asp:BoundField HeaderText="Nb. Cours" DataField="NbCourses" />
                     <asp:CommandField HeaderText="" SelectText="Editer..." ShowSelectButton="true" />
                 </Columns>
             </asp:GridView>

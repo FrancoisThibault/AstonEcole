@@ -1,4 +1,5 @@
-﻿using AstonEcole.DTO;
+﻿using AstonEcole.ApiClient;
+using AstonEcole.DTO;
 using AstonEcole.Services;
 using System;
 using System.Collections.Generic;
@@ -11,27 +12,25 @@ namespace AstonEcole.Web
 {
     public partial class Teachers : System.Web.UI.Page
     {
+        private AstonEcoleApiClient _Client = new AstonEcoleApiClient();
+
         protected override void OnPreRender(EventArgs e)
         {
-            using (TeacherServices svc = new TeacherServices())
-            {
-                var x = svc.LoadTeachersWithNbCourses();
-                gridTeachers.DataSource = x.Select(t => new { TeacherId = t.Teacher.Id, TeacherName = t.Teacher.Name, NbCourses = t.NbCourses });
-                gridTeachers.DataBind();
-            }
+            var teachers = _Client.getTeachers();
+
+            gridTeachers.DataSource = teachers;
+            gridTeachers.DataBind();
+            
             base.OnPreRender(e);
         }
 
         protected void gridTeachers_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idSelectedTeacher = (int)gridTeachers.SelectedValue;
-            Teacher selectedTeacher;
-            using (TeacherServices svc = new TeacherServices())
-            {
-                selectedTeacher = svc.LoadTeacher(idSelectedTeacher);
-                hidTeacherId.Value = selectedTeacher.Id.ToString();
-                txtTeacherName.Text = selectedTeacher.Name;
-            }
+            Teacher selectedTeacher = _Client.getTeacher(idSelectedTeacher);
+            hidTeacherId.Value = selectedTeacher.Id.ToString();
+            txtTeacherName.Text = selectedTeacher.Name;
+            
 
             using (CoursesServices svc = new CoursesServices())
             {
