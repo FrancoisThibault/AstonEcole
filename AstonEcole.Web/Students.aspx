@@ -11,18 +11,41 @@
     <form id="form1" runat="server">
     <div>
 
-        <asp:GridView ID="GridViewStudents" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewStudents_SelectedIndexChanged" OnPreRender="GridViewStudents_PreRender">
+        <asp:GridView ID="GridViewStudents" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewStudents_SelectedIndexChanged"  OnPreRender="GridViewStudents_PreRender">
             <Columns>
                  <asp:BoundField HeaderText="Id Student" DataField="Id" />
                 <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
-                <asp:BoundField HeaderText="Nombre Elèves" DataField="NbCours" />
+                <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
                                 
                 <asp:CommandField  SelectText="Voir" ShowSelectButton="true" /> 
                 
             </Columns>
         </asp:GridView>
     
+        <asp:TextBox ID="TextBoxNomEleve" runat="server"></asp:TextBox>
+    
     </div>
+
+          <div>
+     
+        
+            </div>
+
+         <div>
+           <asp:GridView ID="GridViewListeCours" DataKeyNames="Id" runat="server" AutoGenerateColumns="False"  OnRowDataBound="GridViewListeCours_RowDataBound" >
+            <Columns>
+                 <asp:BoundField HeaderText="Id Cours" DataField="Id" />
+                <asp:BoundField HeaderText="Sujet Cours" DataField="Subject" />                 
+                <asp:CheckBoxField HeaderText="Assiste" DataField="Assiste"  />
+                
+            </Columns>
+        </asp:GridView>
+             </div>
+
+          <div>
+            <asp:Button runat="server"  ID="ButtonValider"   Text="Valider" OnClick="ButtonValider_Click" />
+        </div>
+
     </form>
 </body>
 </html>
