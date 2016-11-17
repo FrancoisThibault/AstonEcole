@@ -15,7 +15,7 @@ using System.Web.UI;
 
 namespace AstonEcole.ApiClient
 {
-    public class AstonApiClient
+    public class AstonApiClient : IDisposable
     {
         protected HttpClient astonSvc { get; private set; }
 
@@ -28,7 +28,7 @@ namespace AstonEcole.ApiClient
         }
 
 
-        private TResult GetAsync<TResult>(string api)
+        protected TResult GetAsync<TResult>(string api)
        where TResult : class, new()
         {
             Task<HttpResponseMessage> response = astonSvc.GetAsync(api);
@@ -40,8 +40,13 @@ namespace AstonEcole.ApiClient
             return result;
         }
 
-
-
+        public void Dispose()
+        {
+           if (astonSvc != null)
+            {
+                astonSvc.Dispose();
+            }
+        }
     }
 
 }

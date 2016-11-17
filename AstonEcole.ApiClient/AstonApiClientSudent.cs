@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AstonEcole.ApiClient
 {
-    class AstonApiClientSudent : AstonApiClient
+    public class AstonApiClientSudent : AstonApiClient
     {
         
 
@@ -27,7 +27,7 @@ namespace AstonEcole.ApiClient
         public async Task<List<Student>> GetStudents()
         {
             List<Student> student = null;
-            HttpResponseMessage response = await astonSvc.GetAsync($"api/Students/{id}");
+            HttpResponseMessage response = await astonSvc.GetAsync($"api/Students");
             if (response.IsSuccessStatusCode)
             {
                 student = await response.Content.ReadAsAsync<List<Student>>();
