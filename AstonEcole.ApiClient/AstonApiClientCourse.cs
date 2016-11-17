@@ -11,7 +11,7 @@ namespace AstonEcole.ApiClient
     public class AstonApiClientCourse : AstonApiClient
     {
 
-        public async Task<List<Course>> GetCourses()
+        public async Task<List<Course>> GetCourses() // { Renvoie la liste des cours }
         {
             List<Course> courses = null;
             HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses");
@@ -23,7 +23,7 @@ namespace AstonEcole.ApiClient
             return courses;
         }
 
-        public async Task<Course> GetCourseById(int id)
+        public async Task<Course> GetCourseById(int id) // { Envoie un cours en fonction de son Id }
         {
             Course course = null;
             HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/{id}");
@@ -34,9 +34,8 @@ namespace AstonEcole.ApiClient
 
             return course;
         }
-
         
-        public async Task<List<Boolean>> GetCourseByNom(string matiere) 
+        public async Task<List<Boolean>> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
         {
             List<Boolean> Listes = null;
             HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/searchByName/{matiere}");
@@ -47,25 +46,17 @@ namespace AstonEcole.ApiClient
             return Listes;
         }
 
-        #region 
-        /// <summary>
-        /// Region des Cours !
-        /// </summary>
-        /// <returns>GET, POST, PUT, DELETE</returns>
-        //public List<Course> GetCourses() // { Renvoie la liste des cours }
-        //{
-        //    return GetAsync<List<Course>>($"api/Courses");
-        //}
+        public async Task<List<CourseWithNbStudents>> GetCourseNbEleves() // { Envoie cours avec nombre d'élèves }
+        {
+            List<CourseWithNbStudents> ListesNbEleves = null;
+            HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/NbEleves");
+            if (response.IsSuccessStatusCode)
+            {
+                ListesNbEleves = await response.Content.ReadAsAsync<List<CourseWithNbStudents>>();
+            }
 
-        //public Course GetCourseById(int id) // { Envoie un cours en fonction de son Id }
-        //{
-        //    return GetAsync<Course>($"api/Courses/{id}");
-        //}
-
-        //public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
-        //{
-        //    return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
-        //}
+            return ListesNbEleves;
+        }
 
         public void UpdateCourse(Course cours) // { Mise à jour des cours }
         {
@@ -81,6 +72,48 @@ namespace AstonEcole.ApiClient
         {
             astonSvc.DeleteAsync($"api/Courses/{id}");
         }
+
+
+
+        #region 
+        /// <summary>
+        /// Region des Cours !
+        /// </summary>
+        /// <returns>GET, POST, PUT, DELETE</returns>
+        //public List<Course> GetCourses() 
+        //{
+        //    return GetAsync<List<Course>>($"api/Courses");
+        //}
+
+        //public Course GetCourseById(int id) 
+        //{
+        //    return GetAsync<Course>($"api/Courses/{id}");
+        //}
+
+        //public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
+        //{
+        //    return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
+        //}
+
+        //public List<CourseWithNbStudents> GetCourseNbEleves() // { Envoie cours avec nombre d'élèves }
+        //{
+        //    return GetAsync<List<CourseWithNbStudents>>($"api/Courses/NbEleves");
+        //}
+
+        //public void UpdateCourse(Course cours) // { Mise à jour des cours }
+        //{
+        //    astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        //}
+
+        //public void AddCourse(Course cours) // { Ajout de cours }
+        //{
+        //    astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+        //}
+
+        //public void DeleteCourse(int id) // { Suppression de cours }
+        //{
+        //    astonSvc.DeleteAsync($"api/Courses/{id}");
+        //}
         #endregion
 
 

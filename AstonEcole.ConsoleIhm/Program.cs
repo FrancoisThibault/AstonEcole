@@ -24,6 +24,9 @@ namespace AstonEcole.ConsoleIhm
             //Console.WriteLine(myriam.FirstName);
             //Console.ReadLine();
 
+            //List<CourseWithNbStudents> l = svc.GetCourseNbEleves();
+            //l.ForEach(c => Console.WriteLine(c.Course+" "+c.NbStudents));
+            //Console.Read();
         }
     }
 }
