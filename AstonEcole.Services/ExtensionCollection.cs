@@ -20,6 +20,38 @@ namespace AstonEcole.Services
             collectionItem.Remove(item);
         }
 
+        public static void Add<T>(this ICollection<T> collectionItem, int id) where T : IHasId
+        {
+           
+        }
+
+        public static void updateCollection<T>(this ICollection<T> collectionToUpdate, ICollection<int> UpdatingCollection, ICollection<T> CollectionAll,  DbContext context) where T : class, IHasId
+        {
+            // parcours des item  To Update
+            foreach (T item in collectionToUpdate.ToList())
+            {
+                // si l'id de cet item n'existe pas dans les id UpdatingCollection => le supprimer
+                if (!(UpdatingCollection.Any(id => id == item.Id)))
+                {
+                    collectionToUpdate.Remove(item);
+                }
+            }
+
+
+            // parcours des ids de l'UpdatingCollection
+            foreach (int id in UpdatingCollection.ToList())
+            {
+                // si l' item n'existe pas dans les items To update => le rajouter
+                if (!(collectionToUpdate.Any(c => c.Id == id)))
+                {                    
+                    T item = CollectionAll.Where(i => i.Id == id).FirstOrDefault();
+                    // attacher l'item => retrouver l'item en base et pas en créer un nouveau
+                    context.Entry(item).State = EntityState.Unchanged;
+                    collectionToUpdate.Add(item);
+                }
+            }
+
+        }
 
         public static void  updateCollection<T>(this ICollection<T> collectionToUpdate, ICollection<T> UpdatingCollection, DbContext context) where T : class, IHasId
         {

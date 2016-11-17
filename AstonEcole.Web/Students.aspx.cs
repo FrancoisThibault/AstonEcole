@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AstonEcole.Web.Infrastructure;
 using AstonEcole.DTO;
+using AstonEcole.Services;
 
 namespace AstonEcole.Web
 {
@@ -28,6 +29,66 @@ namespace AstonEcole.Web
             GridViewStudents.DataSource = listeStudents;
             GridViewStudents.DataBind();
 
+        }
+
+        protected void GridViewStudents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idStudent = (int)GridViewStudents.SelectedValue;
+
+            Student SelectedStudent = astonApiClient.GetStudent(idStudent);
+
+            this.TextBoxNomEleve.Text = SelectedStudent.FirstName;
+
+            var query = astonApiClient.GetCourses().Select(cours => new { Id = cours.Id, Subject = cours.Subject,
+                Assiste = SelectedStudent.Courses.Any(c => c.Id == cours.Id) });
+
+
+            GridViewListeCours.DataSource = query.ToList();
+            GridViewListeCours.DataBind();
+        }
+
+        protected void GridViewListeCours_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            // si c'est une ligne de données et pas en-tête 
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // Cell[2] la troisième cellule contient un seul contrôle le checkbox => le rendre éditable   
+                ((CheckBox)e.Row.Cells[2].Controls[0]).Enabled = true;
+            }
+        }
+
+        protected void ButtonValider_Click(object sender, EventArgs e)
+        {
+
+            int idStudent = (int)GridViewStudents.SelectedValue;
+
+            // récupération de la liste des cours sélectionnés
+            List<int> listIdCoursSelectionnes = new List<int>();
+
+            foreach (GridViewRow row in GridViewListeCours.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    if (((CheckBox)row.Cells[2].Controls[0]).Checked)
+                    {
+                        int idCours = (int)GridViewListeCours.DataKeys[row.RowIndex][0];
+                        listIdCoursSelectionnes.Add(idCours);
+                    }
+
+                }
+            }
+
+            //mettre a jour les cours de l'étudiant sélectionné
+            Student SelectedStudent = astonApiClient.GetStudent(idStudent);
+
+            List<Course> listAllCourses = astonApiClient.GetCourses();
+
+            SelectedStudent.Courses = listAllCourses.Where(c => listIdCoursSelectionnes.Contains(c.Id)).ToList();
+
+            astonApiClient.UpdateStudent(SelectedStudent);
+           
+
+         
         }
 
     }

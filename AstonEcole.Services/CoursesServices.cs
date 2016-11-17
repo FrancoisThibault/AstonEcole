@@ -26,7 +26,7 @@ namespace AstonEcole.Services
 
         private IEnumerable<Course> LoadCourses(Func<Course, bool> filter)
         {
-            return Context.Courses.Include(c => c.Teacher).Include(c => c.Students).Where(filter);
+            return Context.Courses.Where(filter);
         }
 
         public Course LoadCourse(int id)

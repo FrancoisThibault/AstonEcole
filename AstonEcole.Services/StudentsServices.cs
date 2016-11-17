@@ -33,7 +33,9 @@ namespace AstonEcole.Services
 
         public void SaveStudent(Student student)
         {
-            Context.Entry<Student>(student).State = EntityState.Modified;
+            Student studentInDB = Context.Students.Include(s => s.Courses).Single(s => s.Id == student.Id);
+            studentInDB.FirstName = student.FirstName;
+            studentInDB.Courses.updateCollection(student.Courses, Context);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AstonEcole.DTO
 {
-    public class Course
+    public class Course : IHasId
     {
         public int Id { get; set; }
         public string Subject { get; set; }
