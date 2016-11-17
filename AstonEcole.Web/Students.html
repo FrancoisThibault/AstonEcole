@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <input type="button" id="getStudents" value="Récupérer les élèves..." />
+    <ul id="students"></ul>
+    <script>
+        $(document).ready(function () {
+            // Send an AJAX request
+            $("#getStudents").click(function () {
+                $.getJSON("http://localhost:56089/api/Students")
+                    .done(function (data) {
+                        // On success, 'data' contains a list of products.
+                        $.each(data, function (key, item) {
+                            // Add a list item for the product.
+                            $('<li>', { text: item.FirstName }).appendTo($('#students'));
+                        });
+                    })
+            });
+        });
+    </script>
+</body>
+</html>
