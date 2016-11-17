@@ -20,13 +20,13 @@ namespace AstonEcole.Web
         {
 
 
-            List<Student> ListStudents =  astonApiClient.GetStudents();
-            var listeStudents = ListStudents.ToList()
-               .Select(eleve => new { Id = eleve.Id, NomStudent = eleve.FirstName,
-                   NbCours = (astonApiClient.GetStudent(eleve.Id)).Courses.Count() });
+            //List<Student> ListStudents =  astonApiClient.GetStudents();
+            //var listeStudents = ListStudents.ToList()
+            //   .Select(eleve => new { Id = eleve.Id, NomStudent = eleve.FirstName,
+            //       NbCours = (astonApiClient.GetStudent(eleve.Id)).Courses.Count() });
 
-            GridViewStudents.DataSource = listeStudents;
-            GridViewStudents.DataBind();
+            //GridViewStudents.DataSource = listeStudents;
+            //GridViewStudents.DataBind();
 
         }
 

@@ -8,11 +8,11 @@ namespace AstonEcole.Web.Infrastructure
 {
     public abstract  class AstonPage : System.Web.UI.Page
     {
-        protected AstonEcoleApiClient astonApiClient { get; private set; }
+        protected AstonApiClient astonApiClient { get; private set; }
 
         protected AstonPage()
         {
-            astonApiClient = new AstonEcoleApiClient();
+            astonApiClient = new AstonApiClient();
         }
 
         // affecte le champ client Api de notre page avec le client api de la page en paramètre

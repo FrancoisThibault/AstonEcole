@@ -1,6 +1,5 @@
 ﻿using AstonEcole.ApiClient;
 using AstonEcole.DTO;
-using AstonEcole.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace AstonEcole.Web
 {
     public partial class Teachers : System.Web.UI.Page
     {
-        private AstonEcoleApiClient _Client = new AstonEcoleApiClient();
+        private AstonApiClientTeacher _Client = new AstonApiClientTeacher();
 
         protected override void OnPreRender(EventArgs e)
         {
@@ -27,16 +26,16 @@ namespace AstonEcole.Web
         protected void gridTeachers_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idSelectedTeacher = (int)gridTeachers.SelectedValue;
-            Teacher selectedTeacher = _Client.getTeacher(idSelectedTeacher);
+            Teacher selectedTeacher = _Client.getTeacher(idSelectedTeacher).Result;
             hidTeacherId.Value = selectedTeacher.Id.ToString();
             txtTeacherName.Text = selectedTeacher.Name;
             
 
-            using (CoursesServices svc = new CoursesServices())
-            {
-                gridCourses.DataSource = svc.LoadCourses().Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
-                gridCourses.DataBind();
-            }
+            //using (CoursesServices svc = new CoursesServices())
+            //{
+            //    gridCourses.DataSource = svc.LoadCourses().Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
+            //    gridCourses.DataBind();
+            //}
         }
 
         protected void gridCourses_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -54,23 +53,23 @@ namespace AstonEcole.Web
         protected void SaveTeacher_Click(object sender, EventArgs e)
         {
             int idUpdatingTeacher = int.Parse(hidTeacherId.Value);
-            using (TeacherServices svc = new TeacherServices())
-            {
-                Teacher updatingTeacher = svc.LoadTeacher(idUpdatingTeacher);
-                updatingTeacher.Name = txtTeacherName.Text;
-                List<int> selectedCourses = new List<int>();
-                foreach (GridViewRow row in gridCourses.Rows)
-                {
-                    CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
-                    if (chk != null && chk.Checked)
-                    {
-                        selectedCourses.Add((int)gridCourses.DataKeys[row.RowIndex]["CourseId"]);
-                    }
-                }
+            //using (TeacherServices svc = new TeacherServices())
+            //{
+            //    Teacher updatingTeacher = svc.LoadTeacher(idUpdatingTeacher);
+            //    updatingTeacher.Name = txtTeacherName.Text;
+            //    List<int> selectedCourses = new List<int>();
+            //    foreach (GridViewRow row in gridCourses.Rows)
+            //    {
+            //        CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
+            //        if (chk != null && chk.Checked)
+            //        {
+            //            selectedCourses.Add((int)gridCourses.DataKeys[row.RowIndex]["CourseId"]);
+            //        }
+            //    }
 
-                svc.UpdateCourses(updatingTeacher, selectedCourses);
-                svc.Save();
-            }
+            //    svc.UpdateCourses(updatingTeacher, selectedCourses);
+            //    svc.Save();
+            //}
         }
     }
 }

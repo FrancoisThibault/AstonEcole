@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AstonEcoleApiClient.cs" />
+    <Compile Include="AstonApiClient.cs" />
+    <Compile Include="AstonApiClientCourse.cs" />
+    <Compile Include="AstonApiClientSudent.cs" />
+    <Compile Include="AstonApiClientTeacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
