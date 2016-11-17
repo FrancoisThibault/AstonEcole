@@ -15,10 +15,10 @@ namespace AstonEcole.ConsoleIhm
         static void Main(string[] args)
         {
             var svc = new AstonEcoleApiClient();
-            Student myriam = svc.GetStudent(1);
+            Student myriam = svc.GetStudent(3);
             myriam.FirstName = "Myriam";
             svc.UpdateStudent(myriam);
-            myriam = svc.GetStudent(1);
+            myriam = svc.GetStudent(3);
             Console.WriteLine(myriam.FirstName);
             Console.ReadLine();
         }
