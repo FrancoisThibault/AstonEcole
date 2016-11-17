@@ -15,14 +15,29 @@ namespace AstonEcole.ConsoleIhm
         static void Main(string[] args)
         {
             var svc = new AstonEcoleApiClient();
-            Student myriam = svc.GetStudent(3);
-            myriam.FirstName = "Philippe"; // { François }
-            myriam.FirstName = "Marswell2"; // { Mario }
-            myriam.FirstName = "Joris"; // { Myriam }
-            svc.UpdateStudent(myriam);
-            myriam = svc.GetStudent(3);
-            Console.WriteLine(myriam.FirstName);
-            Console.ReadLine();
+            //Student myriam = svc.GetStudent(3);
+            //myriam.FirstName = "Philippe"; // { François }
+            //myriam.FirstName = "Marswell2"; // { Mario }
+            //myriam.FirstName = "Joris"; // { Myriam }
+            //svc.UpdateStudent(myriam);
+            //myriam = svc.GetStudent(3);
+            //Console.WriteLine(myriam.FirstName);
+            //Console.ReadLine();
+
+            //{ Get avec Id }
+            //List<Boolean> cours = svc.GetCourseByNom("Web");
+            //cours.ForEach(c => Console.WriteLine(c));
+            //Console.ReadLine();
+
+            //Course myriam = svc.GetCours(3);
+            //myriam.FirstName = "Philippe"; // { François }
+            //myriam.FirstName = "Marswell2"; // { Mario }
+            //myriam.FirstName = "Joris"; // { Myriam }
+            //svc.UpdateStudent(myriam);
+            //myriam = svc.GetStudent(3);
+            //Console.WriteLine(myriam.FirstName);
+            //Console.ReadLine();
+
         }
     }
 }

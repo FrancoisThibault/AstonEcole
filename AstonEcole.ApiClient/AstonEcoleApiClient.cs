@@ -1,4 +1,5 @@
 ﻿using AstonEcole.DTO;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,32 @@ namespace AstonEcole.ApiClient
         {
             return GetAsync<Student>($"api/Students/{id}");
         }
+
+        #region 
+        /// <summary>
+        /// Region des Cours !
+        /// </summary>
+        /// <returns>GET, POST, PUT, DELETE</returns>
+        public List<Course> GetCourses() // { Renvoie la liste des cours }
+        {
+            return GetAsync<List<Course>>($"api/Courses");
+        }
+
+        public Course GetCourseById(int id) // { Envoie un cours en fonction de son Id }
+        {
+            return GetAsync<Course>($"api/Courses/{id}");
+        }
+
+        public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
+        {
+            return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
+        }
+
+        public void UpdateCourse(Course cours)
+        {
+            astonSvc.PutAsJsonAsync<Course>($"api/Students/{cours.Id}", cours).Wait();
+        }
+        #endregion
 
         private TResult GetAsync<TResult>(string api)
             where TResult: class, new()

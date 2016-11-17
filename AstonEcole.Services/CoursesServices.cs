@@ -26,7 +26,7 @@ namespace AstonEcole.Services
 
         private IEnumerable<Course> LoadCourses(Func<Course, bool> filter)
         {
-            return Context.Courses.Include(c => c.Teacher).Where(filter);
+            return Context.Courses.Include(c => c.Teacher).Include(c => c.Students).Where(filter);
         }
 
         public Course LoadCourse(int id)
@@ -52,6 +52,11 @@ namespace AstonEcole.Services
 
             selectedStudents.Where(id => !selectedCourse.Students.Any(s => s.Id == id)).ToList()
                 .ForEach(id => selectedCourse.Students.Add(Context.Students.Single(s => s.Id == id)));
+        }
+
+        public void SaveCourses(Course cours)
+        {
+            Context.Entry<Course>(cours).State = EntityState.Modified;
         }
     }
 }
