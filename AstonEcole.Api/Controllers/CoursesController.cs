@@ -62,5 +62,15 @@ namespace AstonEcole.Api.Controllers
 
             return Ok();
         }
+
+        [HttpDelete]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteCourse(int id)
+        {
+            Service.DeleteCourses(id);
+            Service.Save();
+
+            return Ok();
+        }
     }
 }

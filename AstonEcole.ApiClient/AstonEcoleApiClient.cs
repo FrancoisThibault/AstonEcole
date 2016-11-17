@@ -95,6 +95,11 @@ namespace AstonEcole.ApiClient
         {
             astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }
+
+        public void DeleteCourse(int id) // { Suppression de cours }
+        {
+            astonSvc.DeleteAsync($"api/Courses/{id}");
+        }
         #endregion
 
 

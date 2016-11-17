@@ -24,13 +24,6 @@ namespace AstonEcole.ConsoleIhm
             //Console.WriteLine(myriam.FirstName);
             //Console.ReadLine();
 
-            Course cours = new Course() { Subject = "C#" };
-            svc.AddCourse(cours);
-            cours = svc.GetCourseById(5);
-
-            Console.WriteLine(cours.Subject);
-            Console.ReadLine();
-
         }
     }
 }

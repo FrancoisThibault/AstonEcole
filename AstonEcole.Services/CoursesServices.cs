@@ -63,5 +63,11 @@ namespace AstonEcole.Services
         {
             Context.Entry<Course>(cours).State = EntityState.Added;
         }
+
+        public void DeleteCourses(int id)
+        {
+            Course cours = LoadCourse(id);
+            Context.Entry<Course>(cours).State = EntityState.Deleted;
+        }
     }
 }
