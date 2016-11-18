@@ -72,7 +72,7 @@ namespace AstonEcole.Web
                     }
                 }
 
-                _ClientTeacher.UpdateCourse(updatingTeacher, selectedCourses);
+                _ClientTeacher.UpdateTeacher(updatingTeacher, selectedCourses);
             }
         }
     }

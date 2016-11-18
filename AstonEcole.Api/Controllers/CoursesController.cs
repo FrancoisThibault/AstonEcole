@@ -84,5 +84,18 @@ namespace AstonEcole.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        [Route("UpdateStudents/{id}")]
+        [ResponseType(typeof(IEnumerable<int>))]
+        public IHttpActionResult UpdateStudents(int id, List<int> selectedStudents)
+        {
+            Service.UpdateStudents(id, selectedStudents);
+            Service.Save();
+
+            return Ok();
+        }
+
+
     }
 }
