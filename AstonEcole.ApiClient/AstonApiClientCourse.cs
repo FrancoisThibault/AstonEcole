@@ -54,7 +54,7 @@ namespace AstonEcole.ApiClient
 
         public void UpdateStudents(Course cours, List<int> selectedStudents)
         {
-            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+            astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
             astonSvc.PutAsJsonAsync<List<int>>($"api/Courses/UpdateStudents/{cours.Id}", selectedStudents).Wait();
         }
     }
