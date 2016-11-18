@@ -37,6 +37,14 @@ namespace AstonEcole.Api.Controllers
             return Ok(Service.LoadStudents(s => s.FirstName.Contains(name)));
         }
 
+        [HttpGet]
+        [Route("WithNbCours/")]
+        [ResponseType(typeof(IEnumerable<StudentNbCours>))]
+        public IHttpActionResult GetStudentsWithNbCours()
+        {
+            return Ok(Service.LoadStudentsWithNbCours());
+        }
+
         [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateStudent(int id, Student student)

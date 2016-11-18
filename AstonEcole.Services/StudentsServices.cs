@@ -21,6 +21,11 @@ namespace AstonEcole.Services
             return Context.Courses.Where(c => c.Id == courseId).SelectMany(c => c.Students);
         }
 
+        public IEnumerable<Student> LoadStudentsWithCours(Func<Student, bool> filter)
+        {
+            return Context.Students.Include(s => s.Courses).Where(filter);
+        }
+
         public IEnumerable<Student> LoadStudents()
         {
             return LoadStudents(s => true);
@@ -30,6 +35,17 @@ namespace AstonEcole.Services
         {
             return Context.Students.Where(filter);
         }
+
+        public IEnumerable<StudentNbCours> LoadStudentsWithNbCours()
+        {
+            return LoadStudentsWithCours(s => true).Select(eleve => new StudentNbCours
+            {
+                theStudent = eleve,              
+                NbCours =  eleve.Courses.Count()
+            });
+        }
+
+        
 
         public void SaveStudent(Student student)
         {
