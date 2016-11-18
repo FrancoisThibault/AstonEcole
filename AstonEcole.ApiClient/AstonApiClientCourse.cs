@@ -46,5 +46,10 @@ namespace AstonEcole.ApiClient
         {
             astonSvc.DeleteAsync($"api/Courses/{id}");
         }
+
+        public Course CreateCourse() // { création de cours }
+        {
+            return GetAsync<Course>($"api/Courses/Create");
+        }
     }
 }

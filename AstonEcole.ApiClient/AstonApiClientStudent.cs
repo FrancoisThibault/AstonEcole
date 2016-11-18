@@ -20,12 +20,17 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<Student>>($"api/Students");
         }
 
-        public async Task UpdateStudent(Student student)
+        public List<StudentNbCours> GetStudentsWithNbCours()
         {
-            HttpResponseMessage response = await astonSvc.PutAsJsonAsync<Student>($"api/Students/{student.Id}", student);
+            return GetAsync<List<StudentNbCours>>($"api/Students/WithNbCours");
+        }
+
+        public void UpdateStudent(Student student)
+        {
+            HttpResponseMessage response = astonSvc.PutAsJsonAsync<Student>($"api/Students/{student.Id}", student).Result;
             if (response.IsSuccessStatusCode)
             {
-                student = await response.Content.ReadAsAsync<Student>();
+                student = response.Content.ReadAsAsync<Student>().Result;
             }
         }
 
