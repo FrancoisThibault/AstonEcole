@@ -25,6 +25,7 @@ namespace AstonEcole.Services
             return Context.Teachers.Where(filter);
         }
 
+        
         public Teacher LoadTeacher(int id)
         {
             return LoadTeacher(t => t.Id == id);
@@ -44,6 +45,14 @@ namespace AstonEcole.Services
                 (tdd, cs) => new TeacherWithNbCourses() { Teacher = tdd, NbCourses = cs.Count() });
         }
 
+        public void UpdateCourses(int id , Teacher teacher)
+        {
+            Teacher teacherInMemory = Context.Teachers.Where(v => v.Id == id).Single();
+            teacherInMemory.Name = teacher.Name;
+            Save();
+        }
+
+        
         public void UpdateCourses(Teacher teacher, IEnumerable<int> selectedCourses)
         {
             if (selectedCourses == null)
@@ -56,6 +65,8 @@ namespace AstonEcole.Services
 
             selectedCourses.Where(id => !teacher.Courses.Any(c => c.Id == id)).ToList()
                 .ForEach(id => teacher.Courses.Add(Context.Courses.Single(c => c.Id == id)));
+
+            Save();
         }
 
 

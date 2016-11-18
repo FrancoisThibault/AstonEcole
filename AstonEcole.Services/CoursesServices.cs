@@ -15,8 +15,8 @@ namespace AstonEcole.Services
         {
             Course newCourse = new Course();
             newCourse.Students = new List<Student>();
-            Context.Courses.Add(newCourse);
-            //Context.Entry<Course>(newCourse).State = EntityState.Added;
+            //Context.Courses.Add(newCourse);
+            Context.Entry<Course>(newCourse).State = EntityState.Added;
             return newCourse;
         }
 
@@ -27,7 +27,7 @@ namespace AstonEcole.Services
 
         private IEnumerable<Course> LoadCourses(Func<Course, bool> filter)
         {
-            return Context.Courses.Where(filter);
+            return Context.Courses.Include(c => c.Teacher).Where(filter);
         }
 
         public Course LoadCourse(int id)

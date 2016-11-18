@@ -37,7 +37,26 @@ namespace AstonEcole.Api.Controllers
             return Ok(Service.LoadTeachersWithNbCourses());
         }
 
+
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public void UpdateCourse(int id , Teacher teacher)
+        {
+            Service.UpdateCourses(id , teacher);
+            Service.Save();
+        }
+
+        [Route("UTeacherCourses")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public void UpdateTeacherCourses(Teacher teacher, IEnumerable<int> courses)
+        {
+            Service.UpdateCourses(teacher, courses);
+            Service.Save();
+        }
+
         
+
 
 
     }

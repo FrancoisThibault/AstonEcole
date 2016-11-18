@@ -80,48 +80,53 @@ namespace AstonEcole.Web
         {
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                Course newCourse = new Course();
-                newCourse.Students = new List<Student>();
+                Course newCourse = new Course() {  };
+                newCourse.Subject = txtCourseSubject.Text;
+
                 DisplayCourseDetails(apiClientCourse.AddCourse(newCourse));
             }
         }
 
         protected void SaveCourse_Click(object sender, EventArgs e)
         {
-        //    int idSelectedCourse = int.Parse(hidIdCourse.Value);
-        //    Course selectedCourse;
-        //    using (CoursesServices svc = new CoursesServices())
-        //    {
-        //        if (idSelectedCourse == 0)
-        //        {
-        //            selectedCourse = svc.CreateCourse();
-        //        }
-        //        else
-        //        {
-        //            selectedCourse = svc.LoadCourse(idSelectedCourse);
-        //        }
-
-            //    // Le sujet
-            //    selectedCourse.Subject = txtCourseSubject.Text;
-
-            //    // Le prof
-            //    selectedCourse.Teacher = new TeacherServices(svc).LoadTeacher(int.Parse(ddlTeachers.SelectedValue));
-
-            //    // Les élèves
-            //    List<int> selectedStudents = new List<int>();
-            //    foreach (GridViewRow row in gridStudents.Rows)
+            //int idSelectedCourse = int.Parse(hidIdCourse.Value);
+            //Course selectedCourse;
+            //using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
+            //{
+            //    using (AstonApiClientTeacher apiClientTeacher = new AstonApiClientTeacher())
             //    {
-            //        CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
-            //        if (chk != null && chk.Checked)
+            //        if (idSelectedCourse == 0)
             //        {
-            //            selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
+            //            selectedCourse = apiClientCourse.CreateCourse();
             //        }
+            //        else
+            //        {
+            //            selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse);
+            //        }
+
+            //        // Le sujet
+            //        selectedCourse.Subject = txtCourseSubject.Text;
+
+            //        // Le prof
+            //        selectedCourse.Teacher = apiClientTeacher.LoadTeacher(int.Parse(ddlTeachers.SelectedValue));
+
+            //        // Les élèves
+            //        List<int> selectedStudents = new List<int>();
+            //        foreach (GridViewRow row in gridStudents.Rows)
+            //        {
+            //            CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
+            //            if (chk != null && chk.Checked)
+            //            {
+            //                selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
+            //            }
+            //        }
+
+            //        svc.UpdateStudents(selectedCourse, selectedStudents);
+
+            //        svc.Save();
             //    }
 
-            //    svc.UpdateStudents(selectedCourse, selectedStudents);
-
-        //        svc.Save();
-        //    }
+            //}
         }
     }
 }

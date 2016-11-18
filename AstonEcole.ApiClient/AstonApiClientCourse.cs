@@ -31,7 +31,7 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<CourseWithNbStudents>>($"api/Courses/NbEleves");
         }
 
-        public void UpdateCourse(Course cours) // { Mise à jour des cours }
+        public void UpdateCourse(Course cours) 
         {
             astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }
@@ -45,6 +45,11 @@ namespace AstonEcole.ApiClient
         public void DeleteCourse(int id) // { Suppression de cours }
         {
             astonSvc.DeleteAsync($"api/Courses/{id}");
+        }
+
+        public Course CreateCourse() // { création de cours }
+        {
+            return GetAsync<Course>($"api/Courses/Create");
         }
     }
 }
