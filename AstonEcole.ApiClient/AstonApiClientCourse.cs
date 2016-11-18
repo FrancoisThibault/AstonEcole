@@ -52,9 +52,10 @@ namespace AstonEcole.ApiClient
             return GetAsync<Course>($"api/Courses/Create");
         }
 
-        public void SaveStudentsCours(int id, List<int> selectedStudents)
+        public void UpdateStudents(Course cours, List<int> selectedStudents)
         {
-            astonSvc.PutAsJsonAsync<List<int>>($"api/Courses/UpdateStudents/{id}", selectedStudents).Wait();
+            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+            astonSvc.PutAsJsonAsync<List<int>>($"api/Courses/UpdateStudents/{cours.Id}", selectedStudents).Wait();
         }
     }
 }

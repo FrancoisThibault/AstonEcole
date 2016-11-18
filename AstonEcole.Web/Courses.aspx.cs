@@ -125,7 +125,7 @@ namespace AstonEcole.Web
                         }
 
                         //svc.UpdateCourse(selectedCourse);
-                        apiClientCourse.SaveStudentsCours(selectedCourse.Id, selectedStudents);
+                        apiClientCourse.UpdateStudents(selectedCourse, selectedStudents);
 
                         //svc.Save();
                     }
