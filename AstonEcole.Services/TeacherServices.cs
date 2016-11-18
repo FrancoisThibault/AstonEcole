@@ -45,26 +45,36 @@ namespace AstonEcole.Services
                 (tdd, cs) => new TeacherWithNbCourses() { Teacher = tdd, NbCourses = cs.Count() });
         }
 
-        public void UpdateCourses(int id , Teacher teacher)
+        public void UpdateTeacher(int id , Teacher teacher)
         {
             Teacher teacherInMemory = Context.Teachers.Where(v => v.Id == id).Single();
             teacherInMemory.Name = teacher.Name;
-            Save();
+            
         }
 
         
-        public void UpdateCourses(Teacher teacher, IEnumerable<int> selectedCourses)
+        public void UpdateTeacherCourses(int Teacherid , IEnumerable<int> selectedCourses)
         {
+            Teacher teacherInDb = Context.Teachers.Include(V=>V.Courses).Single(v => v.Id == Teacherid);
+
             if (selectedCourses == null)
             {
                 selectedCourses = new List<int>();
             }
 
-            teacher.Courses.Where(c => !selectedCourses.Contains(c.Id)).ToList()
-                .ForEach(c => teacher.Courses.Remove(c));
+            teacherInDb.Courses.Where(c => !selectedCourses.Contains(c.Id)).ToList()
+                .ForEach(c => teacherInDb.Courses.Remove(c));
 
-            selectedCourses.Where(id => !teacher.Courses.Any(c => c.Id == id)).ToList()
-                .ForEach(id => teacher.Courses.Add(Context.Courses.Single(c => c.Id == id)));
+            /*selectedCourses.Where(id => !teacherInDb.Courses.Any(c => c.Id == Teacherid)).ToList()
+                .ForEach(id => teacherInDb.Courses.Add(Context.Courses.Single(c => c.Id == id)));*/
+
+            foreach(int i in selectedCourses)
+            {
+                Course course = Context.Courses.Single(a=>a.Id==i);
+                if (!teacherInDb.Courses.Contains(course))
+                { teacherInDb.Courses.Add(course); }
+            }
+
 
             Save();
         }

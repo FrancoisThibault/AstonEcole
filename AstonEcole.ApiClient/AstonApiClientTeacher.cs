@@ -28,10 +28,10 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<TeacherWithNbCourses>>("api/Teachers/TeacherCourses");
         }
 
-        public void UpdateCourse(Teacher teacher , IEnumerable<int> courses)
+        public void UpdateTeacher(Teacher teacher , IEnumerable<int> courses)
         {
-            astonSvc.PutAsJsonAsync($"api/Teachers/{teacher.Id}", teacher);
-            astonSvc.PutAsJsonAsync($"api/Teachers/UTeacherCourses{teacher.Id}", courses);
+            astonSvc.PutAsJsonAsync($"api/Teachers/{teacher.Id}", teacher).Wait();
+            astonSvc.PutAsJsonAsync($"api/Teachers/UTeacherCourses/{teacher.Id}", courses).Wait();
         }
 
         
