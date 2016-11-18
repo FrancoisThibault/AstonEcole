@@ -13,6 +13,7 @@ namespace AstonEcole.Api
         {
             // Configuration et services API Web
             config.Formatters.Add(new CsvMediaTypeFormatter<Student>());
+            config.EnableCors();
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

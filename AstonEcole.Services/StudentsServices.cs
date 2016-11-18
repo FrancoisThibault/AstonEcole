@@ -36,16 +36,25 @@ namespace AstonEcole.Services
             return Context.Students.Where(filter);
         }
 
-        public IEnumerable<StudentNbCours> LoadStudentsWithNbCours()
+       /* public IEnumerable<StudentNbCours> LoadStudentsWithNbCours()
         {
             return LoadStudentsWithCours(s => true).Select(eleve => new StudentNbCours
             {
                 theStudent = eleve,              
                 NbCours =  eleve.Courses.Count()
             });
+        }*/
+
+        public IEnumerable<StudentNbCours> LoadStudentsWithNbCours()
+        {
+            return Context.Students.Select(eleve => new StudentNbCours
+            {
+                theStudent = eleve,
+                NbCours = eleve.Courses.Count()
+            });
         }
 
-        
+
 
         public void SaveStudent(Student student)
         {
