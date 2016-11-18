@@ -9,6 +9,8 @@
 <body>
     <input type="button" id="getStudents" value="Récupérer les élèves..." />
     <ul id="students"></ul>
+    <input type="button" id="quand" value="Quel jour sommes-nous ?"/>
+    <span id="txtDateJour"></span>
     <script>
         $(document).ready(function () {
             // Send an AJAX request
@@ -20,6 +22,14 @@
                             // Add a list item for the product.
                             $('<li>', { text: item.FirstName }).appendTo($('#students'));
                         });
+                    })
+            });
+
+            $("#quand").click(function () {
+                $.getJSON("http://localhost:51767/api/Test")
+                    .done(function (data) {
+                        // On success, 'data' contains a list of products.
+                        $("#txtDateJour").text(data);
                     })
             });
         });

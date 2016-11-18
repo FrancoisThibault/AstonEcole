@@ -1,19 +1,15 @@
-﻿using AstonEcole.Api.Infrastructure;
-using AstonEcole.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 
-namespace AstonEcole.Api
+namespace AstonEcole.Web
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            // Configuration et services API Web
-            config.Formatters.Add(new CsvMediaTypeFormatter<Student>());
-
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
 
@@ -23,7 +19,7 @@ namespace AstonEcole.Api
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling 
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
                 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
