@@ -6,12 +6,14 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" OnSelectedIndexChanged="gridCourses_SelectedIndexChanged">
                 <Columns>
+                    <asp:BoundField HeaderText="Id" DataField="CourseId" />
                     <asp:BoundField HeaderText="Sujet" DataField="Subject" />
                     <asp:BoundField HeaderText="Enseignant" DataField="TeacherName" />
                     <asp:BoundField HeaderText="Nb. Elèves" DataField="NbStudents" />
@@ -20,6 +22,7 @@
             </asp:GridView>
             <asp:Button ID="NewCourse" runat="server" OnClick="NewCourse_Click" Text="Nouveau cours" />
         </div>
+        <span id="monSpan"></span>
         <div>
             <asp:HiddenField ID="hidIdCourse" runat="server" />
             <asp:TextBox ID="txtCourseSubject" runat="server"></asp:TextBox>
@@ -33,5 +36,15 @@
             <asp:Button ID="SaveCourse" runat="server" Text="Sauvegarder" OnClick="SaveCourse_Click" />
         </div>
     </form>
+    <script>
+        $(document).ready(function () {
+
+            var grid = $("#gridCourses");
+            $("td", grid).on("click", function () {
+                $("#monSpan").text((this).innerText);
+            });
+
+        });
+    </script>
 </body>
 </html>
