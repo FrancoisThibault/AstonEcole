@@ -25,16 +25,9 @@ namespace AstonEcole.ApiClient
             return teacher;
         }
 
-        public async Task<List<Teacher>> getTeachers()
+        public List<Teacher> getTeachers()
         {
-            List<Teacher> Teachers = null;
-            HttpResponseMessage response = await astonSvc.GetAsync("api/Teachers");
-            if (response.IsSuccessStatusCode)
-            {
-                Teachers = await response.Content.ReadAsAsync<List<Teacher>>();
-            }
-
-            return Teachers;
+            return GetAsync<List<Teacher>>("api/Teachers");
         }
 
         public async Task<IEnumerable<TeacherWithNbCourses>> LoadTeachersWithNbCourses()

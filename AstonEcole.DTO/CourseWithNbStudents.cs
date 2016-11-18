@@ -9,6 +9,20 @@ namespace AstonEcole.DTO
 {
     public class CourseWithNbStudents
     {
+        public CourseWithNbStudents() { }
+
+        public CourseWithNbStudents(Course course)
+        {
+            NbStudents = course.Students.Count;
+            course.Students = null;
+            if (course.Teacher != null)
+            {
+                course.Teacher.Courses = null;
+            }
+
+            Course = course;
+        }
+
         public Course Course { get; set; }
         public int NbStudents { get; set; }
     }

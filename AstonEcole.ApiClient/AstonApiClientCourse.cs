@@ -10,52 +10,25 @@ namespace AstonEcole.ApiClient
 {
     public class AstonApiClientCourse : AstonApiClient
     {
-
-        public async Task<List<Course>> GetCourses() // { Renvoie la liste des cours }
+        /// <returns>GET, POST, PUT, DELETE</returns>
+        public List<Course> GetCourses()
         {
-            List<Course> courses = null;
-            HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses");
-            if (response.IsSuccessStatusCode)
-            {
-                courses = await response.Content.ReadAsAsync<List<Course>>();
-            }
-
-            return courses;
+            return GetAsync<List<Course>>($"api/Courses");
         }
 
-        public async Task<Course> GetCourseById(int id) // { Envoie un cours en fonction de son Id }
+        public Course GetCourseById(int id)
         {
-            Course course = null;
-            HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                course = await response.Content.ReadAsAsync<Course>();
-            }
-
-            return course;
-        }
-        
-        public async Task<List<Boolean>> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
-        {
-            List<Boolean> Listes = null;
-            HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/searchByName/{matiere}");
-            if (response.IsSuccessStatusCode)
-            {
-                Listes = await response.Content.ReadAsAsync<List<Boolean>>();
-            }
-            return Listes;
+            return GetAsync<Course>($"api/Courses/{id}");
         }
 
-        public async Task<List<CourseWithNbStudents>> GetCourseNbEleves() // { Envoie cours avec nombre d'élèves }
+        public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
         {
-            List<CourseWithNbStudents> ListesNbEleves = null;
-            HttpResponseMessage response = await astonSvc.GetAsync($"api/Courses/NbEleves");
-            if (response.IsSuccessStatusCode)
-            {
-                ListesNbEleves = await response.Content.ReadAsAsync<List<CourseWithNbStudents>>();
-            }
+            return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
+        }
 
-            return ListesNbEleves;
+        public List<CourseWithNbStudents> GetCourseNbEleves() // { Envoie cours avec nombre d'élèves }
+        {
+            return GetAsync<List<CourseWithNbStudents>>($"api/Courses/NbEleves");
         }
 
         public void UpdateCourse(Course cours) // { Mise à jour des cours }
@@ -63,65 +36,15 @@ namespace AstonEcole.ApiClient
             astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }
 
-        public async Task<Course> AddCourse(Course cours) // { Ajout de cours }
+        public Course AddCourse(Course cours) // { Ajout de cours }
         {
-            Course AddEleve = null;
-            HttpResponseMessage response = await astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours);
-            if (response.IsSuccessStatusCode)
-            {
-                AddEleve = await response.Content.ReadAsAsync<Course>();
-            }
-
-            return AddEleve;
+            astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
+            return cours;
         }
 
         public void DeleteCourse(int id) // { Suppression de cours }
         {
             astonSvc.DeleteAsync($"api/Courses/{id}");
         }
-
-
-        #region 
-        /// <summary>
-        /// Region des Cours !
-        /// </summary>
-        /// <returns>GET, POST, PUT, DELETE</returns>
-        //public List<Course> GetCourses() 
-        //{
-        //    return GetAsync<List<Course>>($"api/Courses");
-        //}
-
-        //public Course GetCourseById(int id) 
-        //{
-        //    return GetAsync<Course>($"api/Courses/{id}");
-        //}
-
-        //public List<Boolean> GetCourseByNom(string matiere) // { Envoie un cours en fonction de sa matière }
-        //{
-        //    return GetAsync<List<Boolean>>($"api/Courses/searchByName/{matiere}");
-        //}
-
-        //public List<CourseWithNbStudents> GetCourseNbEleves() // { Envoie cours avec nombre d'élèves }
-        //{
-        //    return GetAsync<List<CourseWithNbStudents>>($"api/Courses/NbEleves");
-        //}
-
-        //public void UpdateCourse(Course cours) // { Mise à jour des cours }
-        //{
-        //    astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
-        //}
-
-        //public void AddCourse(Course cours) // { Ajout de cours }
-        //{
-        //    astonSvc.PostAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
-        //}
-
-        //public void DeleteCourse(int id) // { Suppression de cours }
-        //{
-        //    astonSvc.DeleteAsync($"api/Courses/{id}");
-        //}
-        #endregion
-
-
     }
 }

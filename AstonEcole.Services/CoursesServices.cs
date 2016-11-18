@@ -36,8 +36,8 @@ namespace AstonEcole.Services
 
         public IEnumerable<CourseWithNbStudents> LoadCoursesWithNbStudents()
         {
-            return Context.Courses.Include(c => c.Teacher).ToList()
-                .Select(c => new CourseWithNbStudents() { Course = c, NbStudents = c.Students.Count });
+            return Context.Courses.Include(c => c.Teacher).Include(c => c.Students).ToList()
+                .Select(c => new CourseWithNbStudents(c));
         }
 
         public void UpdateStudents(Course selectedCourse, IEnumerable<int> selectedStudents)

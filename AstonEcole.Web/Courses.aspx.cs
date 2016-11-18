@@ -16,7 +16,7 @@ namespace AstonEcole.Web
         {
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                gridCourses.DataSource = apiClientCourse.GetCourseNbEleves().Result.Select(c =>
+                gridCourses.DataSource = apiClientCourse.GetCourseNbEleves().Select(c =>
                 new
                 {
                     CourseId = c.Course.Id,
@@ -49,7 +49,7 @@ namespace AstonEcole.Web
             Course selectedCourse;
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse).Result;
+                selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse);
             }
 
             DisplayCourseDetails(selectedCourse);
@@ -62,15 +62,15 @@ namespace AstonEcole.Web
 
             using (AstonApiClientTeacher apiClientTeach = new AstonApiClientTeacher())
             {
-                ddlTeachers.DataSource = apiClientTeach.getTeachers().Result.Select(t => new { TeacherId = t.Id, TeacherName = t.Name });
+                ddlTeachers.DataSource = apiClientTeach.getTeachers().Select(t => new { TeacherId = t.Id, TeacherName = t.Name });
                 ddlTeachers.DataBind();
                 ddlTeachers.SelectedValue = course.Teacher?.Id.ToString();
             }
 
             using (AstonApiClientStudent apiClientStudent = new AstonApiClientStudent())
             {
-                IEnumerable<Student> studentInCourse = apiClientStudent.GetStudents().Result.Where(s => s.Id == course.Id).ToList();
-                IEnumerable<Student> allStudents = apiClientStudent.GetStudents().Result;
+                IEnumerable<Student> studentInCourse = apiClientStudent.GetStudents().Where(s => s.Id == course.Id).ToList();
+                IEnumerable<Student> allStudents = apiClientStudent.GetStudents();
                 gridStudents.DataSource = allStudents.Select(s => new { StudentId = s.Id, StudentName = s.FirstName, IsSelected = studentInCourse.Contains(s) });
                 gridStudents.DataBind();
             }
@@ -82,12 +82,12 @@ namespace AstonEcole.Web
             {
                 Course newCourse = new Course();
                 newCourse.Students = new List<Student>();
-                DisplayCourseDetails(apiClientCourse.AddCourse(newCourse).Result);
+                DisplayCourseDetails(apiClientCourse.AddCourse(newCourse));
             }
         }
 
-        //protected void SaveCourse_Click(object sender, EventArgs e)
-        //{
+        protected void SaveCourse_Click(object sender, EventArgs e)
+        {
         //    int idSelectedCourse = int.Parse(hidIdCourse.Value);
         //    Course selectedCourse;
         //    using (CoursesServices svc = new CoursesServices())
@@ -122,6 +122,6 @@ namespace AstonEcole.Web
 
         //        svc.Save();
         //    }
-        //}
+        }
     }
 }
