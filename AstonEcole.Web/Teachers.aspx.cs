@@ -34,7 +34,7 @@ namespace AstonEcole.Web
         protected void gridTeachers_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idSelectedTeacher = (int)gridTeachers.SelectedValue;
-            Teacher selectedTeacher = _ClientTeacher.getTeacher(idSelectedTeacher).Result;
+            Teacher selectedTeacher = _ClientTeacher.getTeacher(idSelectedTeacher);
             hidTeacherId.Value = selectedTeacher.Id.ToString();
             txtTeacherName.Text = selectedTeacher.Name;
 
@@ -60,7 +60,7 @@ namespace AstonEcole.Web
             int idUpdatingTeacher = int.Parse(hidTeacherId.Value);
             
             {
-                Teacher updatingTeacher = _ClientTeacher.getTeacher(idUpdatingTeacher).Result;
+                Teacher updatingTeacher = _ClientTeacher.getTeacher(idUpdatingTeacher);
                 updatingTeacher.Name = txtTeacherName.Text;
                 List<int> selectedCourses = new List<int>();
                 foreach (GridViewRow row in gridCourses.Rows)
@@ -72,8 +72,7 @@ namespace AstonEcole.Web
                     }
                 }
 
-                /*_ClientCourse.UpdateCourse(updatingTeacher, selectedCourses);
-                _ClientCourse.Save();*/
+                _ClientTeacher.UpdateCourse(updatingTeacher, selectedCourses);
             }
         }
     }
