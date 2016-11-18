@@ -40,9 +40,18 @@ namespace AstonEcole.Api.Controllers
 
         [HttpPut]
         [ResponseType(typeof(void))]
-        public void UpdateCourse(Teacher teacher, IEnumerable<int> courses)
+        public void UpdateTeacher(int id , Teacher teacher)
         {
-            Service.UpdateCourses(teacher , courses);
+            Service.UpdateTeacher(id , teacher);
+            Service.Save();
+        }
+
+        [Route("UTeacherCourses/{id}")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public void UpdateTeacherCourses(int id, IEnumerable<int> courses)
+        {
+            Service.UpdateTeacherCourses(id, courses);
             Service.Save();
         }
 

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstonEcole.ODataApi", "Asto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstonEcole.oDataClient", "AstonEcole.oDataClient\AstonEcole.oDataClient.csproj", "{121853CB-5D88-4AB1-B229-21E9318EDA3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstonEcole.DALTests", "AstonEcole.DALTests\AstonEcole.DALTests.csproj", "{D26FC5A1-B3A1-44DA-8A01-D47AF517E564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{121853CB-5D88-4AB1-B229-21E9318EDA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{121853CB-5D88-4AB1-B229-21E9318EDA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{121853CB-5D88-4AB1-B229-21E9318EDA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26FC5A1-B3A1-44DA-8A01-D47AF517E564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26FC5A1-B3A1-44DA-8A01-D47AF517E564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26FC5A1-B3A1-44DA-8A01-D47AF517E564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26FC5A1-B3A1-44DA-8A01-D47AF517E564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
