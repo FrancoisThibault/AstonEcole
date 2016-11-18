@@ -45,6 +45,14 @@ namespace AstonEcole.Services
                 (tdd, cs) => new TeacherWithNbCourses() { Teacher = tdd, NbCourses = cs.Count() });
         }
 
+        public void UpdateCourses(int id , Teacher teacher)
+        {
+            Teacher teacherInMemory = Context.Teachers.Where(v => v.Id == id).Single();
+            teacherInMemory.Name = teacher.Name;
+            Save();
+        }
+
+        
         public void UpdateCourses(Teacher teacher, IEnumerable<int> selectedCourses)
         {
             if (selectedCourses == null)
