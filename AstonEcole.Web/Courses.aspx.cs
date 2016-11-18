@@ -80,7 +80,7 @@ namespace AstonEcole.Web
         {
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                Course newCourse = new Course() {  };
+                Course newCourse = new Course() { };
                 newCourse.Subject = txtCourseSubject.Text;
 
                 DisplayCourseDetails(apiClientCourse.AddCourse(newCourse));
@@ -89,44 +89,48 @@ namespace AstonEcole.Web
 
         protected void SaveCourse_Click(object sender, EventArgs e)
         {
-            //int idSelectedCourse = int.Parse(hidIdCourse.Value);
-            //Course selectedCourse;
-            //using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
-            //{
-            //    using (AstonApiClientTeacher apiClientTeacher = new AstonApiClientTeacher())
-            //    {
-            //        if (idSelectedCourse == 0)
-            //        {
-            //            selectedCourse = apiClientCourse.CreateCourse();
-            //        }
-            //        else
-            //        {
-            //            selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse);
-            //        }
+            int idSelectedCourse = int.Parse(hidIdCourse.Value);
+            Course selectedCourse;
+            using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
+            {
+                using (AstonApiClientTeacher apiClientTeacher = new AstonApiClientTeacher())
+                {
+                    using (AstonApiClientStudent apiClienStudent = new AstonApiClientStudent())
+                    {
 
-            //        // Le sujet
-            //        selectedCourse.Subject = txtCourseSubject.Text;
+                        if (idSelectedCourse == 0)
+                        {
+                            selectedCourse = apiClientCourse.CreateCourse();
+                        }
+                        else
+                        {
+                            selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse);
+                        }
 
-            //        // Le prof
-            //        selectedCourse.Teacher = apiClientTeacher.LoadTeacher(int.Parse(ddlTeachers.SelectedValue));
+                        // Le sujet
+                        selectedCourse.Subject = txtCourseSubject.Text;
 
-            //        // Les élèves
-            //        List<int> selectedStudents = new List<int>();
-            //        foreach (GridViewRow row in gridStudents.Rows)
-            //        {
-            //            CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
-            //            if (chk != null && chk.Checked)
-            //            {
-            //                selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
-            //            }
-            //        }
+                        // Le prof
+                        selectedCourse.Teacher = apiClientTeacher.getTeacher(int.Parse(ddlTeachers.SelectedValue));
 
-            //        svc.UpdateStudents(selectedCourse, selectedStudents);
+                        // Les élèves
+                        List<int> selectedStudents = new List<int>();
+                        foreach (GridViewRow row in gridStudents.Rows)
+                        {
+                            CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
+                            if (chk != null && chk.Checked)
+                            {
+                                selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
+                            }
+                        }
 
-            //        svc.Save();
-            //    }
+                        //svc.UpdateCourse(selectedCourse);
+                        apiClientCourse.SaveStudentsCours(selectedCourse.Id, selectedStudents);
 
-            //}
+                        //svc.Save();
+                    }
+                }
+            }
         }
     }
 }

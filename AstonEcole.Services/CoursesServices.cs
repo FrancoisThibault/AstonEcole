@@ -55,6 +55,22 @@ namespace AstonEcole.Services
                 .ForEach(id => selectedCourse.Students.Add(Context.Students.Single(s => s.Id == id)));
         }
 
+        public void UpdateStudents(int id, IEnumerable<int> selectedStudents)
+        {
+            if (selectedStudents == null)
+            {
+                selectedStudents = new List<int>();
+            }
+
+            var cours = Context.Courses.Include(s => s.Students).Single(c => c.Id == id);
+
+            cours.Students.Where(s => !selectedStudents.Contains(s.Id)).ToList()
+                .ForEach(s => Context.Entry<Student>(s).State = EntityState.Deleted);
+
+            selectedStudents.Where(ids => !cours.Students.Any(s => s.Id == ids)).ToList()
+                .ForEach(ids => Context.Entry<Student>((Context.Students.Single(s => s.Id == ids))).State = EntityState.Added);
+        }
+
         public void UpdateCourses(Course cours)
         {
             Context.Entry<Course>(cours).State = EntityState.Modified;
