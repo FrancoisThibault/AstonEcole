@@ -16,7 +16,7 @@ namespace AstonEcole.Web
         {
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                gridCourses.DataSource = apiClientCourse.GetCourseNbEleves().Result.Select(c =>
+                gridCourses.DataSource = apiClientCourse.GetCourseNbEleves().Select(c =>
                 new
                 {
                     CourseId = c.Course.Id,
@@ -49,7 +49,7 @@ namespace AstonEcole.Web
             Course selectedCourse;
             using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
             {
-                selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse).Result;
+                selectedCourse = apiClientCourse.GetCourseById(idSelectedCourse);
             }
 
             DisplayCourseDetails(selectedCourse);
@@ -82,46 +82,47 @@ namespace AstonEcole.Web
             {
                 Course newCourse = new Course();
                 newCourse.Students = new List<Student>();
-                DisplayCourseDetails(apiClientCourse.AddCourse(newCourse).Result);
+                apiClientCourse.AddCourse(newCourse);
+                DisplayCourseDetails(newCourse);
             }
         }
 
-        ///protected void SaveCourse_Click(object sender, EventArgs e)
-        //{
-        //    int idSelectedCourse = int.Parse(hidIdCourse.Value);
-        //    Course selectedCourse;
-        //    using (CoursesServices svc = new CoursesServices())
-        //    {
-        //        if (idSelectedCourse == 0)
-        //        {
-        //            selectedCourse = svc.CreateCourse();
-        //        }
-        //        else
-        //        {
-        //            selectedCourse = svc.LoadCourse(idSelectedCourse);
-        //        }
+        protected void SaveCourse_Click(object sender, EventArgs e)
+        {
+            //int idSelectedCourse = int.Parse(hidIdCourse.Value);
+            //Course selectedCourse;
+            //using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
+            //{
+            //    if (idSelectedCourse == 0)
+            //    {
+            //        selectedCourse = apiClientCourse.CreateCourse();
+            //    }
+            //    else
+            //    {
+            //        selectedCourse = svc.LoadCourse(idSelectedCourse);
+            //    }
 
-        //        // Le sujet
-        //        selectedCourse.Subject = txtCourseSubject.Text;
+            //    // Le sujet
+            //    selectedCourse.Subject = txtCourseSubject.Text;
 
-        //        // Le prof
-        //        selectedCourse.Teacher = new TeacherServices(svc).LoadTeacher(int.Parse(ddlTeachers.SelectedValue));
+            //    // Le prof
+            //    selectedCourse.Teacher = new TeacherServices(svc).LoadTeacher(int.Parse(ddlTeachers.SelectedValue));
 
-        //        // Les élèves
-        //        List<int> selectedStudents = new List<int>();
-        //        foreach (GridViewRow row in gridStudents.Rows)
-        //        {
-        //            CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
-        //            if (chk != null && chk.Checked)
-        //            {
-        //                selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
-        //            }
-        //        }
+            //    // Les élèves
+            //    List<int> selectedStudents = new List<int>();
+            //    foreach (GridViewRow row in gridStudents.Rows)
+            //    {
+            //        CheckBox chk = row.Cells[row.Cells.Count - 1].Controls[0] as CheckBox;
+            //        if (chk != null && chk.Checked)
+            //        {
+            //            selectedStudents.Add((int)gridStudents.DataKeys[row.RowIndex]["StudentId"]);
+            //        }
+            //    }
 
-        //        svc.UpdateStudents(selectedCourse, selectedStudents);
+            //    svc.UpdateStudents(selectedCourse, selectedStudents);
 
-        //        svc.Save();
-        //    }
-        //}
+            //    svc.Save();
+            //}
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace AstonEcole.Services
             Course newCourse = new Course();
             newCourse.Students = new List<Student>();
             Context.Courses.Add(newCourse);
+            //Context.Entry<Course>(newCourse).State = EntityState.Added;
             return newCourse;
         }
 

@@ -39,7 +39,7 @@ namespace AstonEcole.Web
             txtTeacherName.Text = selectedTeacher.Name;
 
 
-            gridCourses.DataSource = _ClientCourse.GetCourses().Result.Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
+            gridCourses.DataSource = _ClientCourse.GetCourses().Select(c => new { CourseId = c.Id, CourseName = c.Subject, IsSelected = c.Teacher?.Id == idSelectedTeacher });
             gridCourses.DataBind();
         }
 

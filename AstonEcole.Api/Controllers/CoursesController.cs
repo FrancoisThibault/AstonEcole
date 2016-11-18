@@ -73,5 +73,16 @@ namespace AstonEcole.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("Create")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostCreateCourse()
+        {
+            Service.CreateCourse();
+            Service.Save();
+
+            return Ok();
+        }
     }
 }

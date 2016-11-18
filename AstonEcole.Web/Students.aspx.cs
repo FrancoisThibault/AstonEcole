@@ -44,7 +44,7 @@ namespace AstonEcole.Web
 
             this.TextBoxNomEleve.Text = SelectedStudent.FirstName;
 
-            var query = GetApiClient<AstonApiClientCourse>().GetCourses().Result.Select(cours => new { Id = cours.Id, Subject = cours.Subject,
+            var query = GetApiClient<AstonApiClientCourse>().GetCourses().Select(cours => new { Id = cours.Id, Subject = cours.Subject,
                 Assiste = SelectedStudent.Courses.Any(c => c.Id == cours.Id) });
 
 
@@ -86,7 +86,7 @@ namespace AstonEcole.Web
             //mettre a jour les cours de l'étudiant sélectionné
             Student SelectedStudent = GetApiClient<AstonApiClientStudent>().GetStudent(idStudent).Result;
 
-            List<Course> listAllCourses = GetApiClient<AstonApiClientCourse>().GetCourses().Result;
+            List<Course> listAllCourses = GetApiClient<AstonApiClientCourse>().GetCourses();
 
             SelectedStudent.Courses = listAllCourses.Where(c => listIdCoursSelectionnes.Contains(c.Id)).ToList();
 
