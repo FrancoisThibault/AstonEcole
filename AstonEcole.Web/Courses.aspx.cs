@@ -86,7 +86,7 @@ namespace AstonEcole.Web
             }
         }
 
-        //protected void SaveCourse_Click(object sender, EventArgs e)
+        ///protected void SaveCourse_Click(object sender, EventArgs e)
         //{
         //    int idSelectedCourse = int.Parse(hidIdCourse.Value);
         //    Course selectedCourse;
