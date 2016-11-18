@@ -25,7 +25,7 @@ namespace AstonEcole.Web
         {
             var teachers = _ClientTeacher.getTeachers();
 
-            gridTeachers.DataSource = teachers;
+            gridTeachers.DataSource = teachers.Select(t => new { TeacherId = t.Id, TeacherName = t.Name }); ;
             gridTeachers.DataBind();
             
             base.OnPreRender(e);

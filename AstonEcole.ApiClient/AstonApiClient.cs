@@ -29,7 +29,7 @@ namespace AstonEcole.ApiClient
 
 
         protected TResult GetAsync<TResult>(string api)
-       where TResult : class, new()
+            where TResult : class, new()
         {
             Task<HttpResponseMessage> response = astonSvc.GetAsync(api);
 
@@ -42,7 +42,7 @@ namespace AstonEcole.ApiClient
 
         public void Dispose()
         {
-           if (astonSvc != null)
+            if (astonSvc != null)
             {
                 astonSvc.Dispose();
             }
@@ -50,4 +50,3 @@ namespace AstonEcole.ApiClient
     }
 
 }
-        

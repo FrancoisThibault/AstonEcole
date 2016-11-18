@@ -62,15 +62,15 @@ namespace AstonEcole.Web
 
             using (AstonApiClientTeacher apiClientTeach = new AstonApiClientTeacher())
             {
-                ddlTeachers.DataSource = apiClientTeach.getTeachers().Result.Select(t => new { TeacherId = t.Id, TeacherName = t.Name });
+                ddlTeachers.DataSource = apiClientTeach.getTeachers().Select(t => new { TeacherId = t.Id, TeacherName = t.Name });
                 ddlTeachers.DataBind();
                 ddlTeachers.SelectedValue = course.Teacher?.Id.ToString();
             }
 
             using (AstonApiClientStudent apiClientStudent = new AstonApiClientStudent())
             {
-                IEnumerable<Student> studentInCourse = apiClientStudent.GetStudents().Result.Where(s => s.Id == course.Id).ToList();
-                IEnumerable<Student> allStudents = apiClientStudent.GetStudents().Result;
+                IEnumerable<Student> studentInCourse = apiClientStudent.GetStudents().Where(s => s.Id == course.Id).ToList();
+                IEnumerable<Student> allStudents = apiClientStudent.GetStudents();
                 gridStudents.DataSource = allStudents.Select(s => new { StudentId = s.Id, StudentName = s.FirstName, IsSelected = studentInCourse.Contains(s) });
                 gridStudents.DataBind();
             }
@@ -82,25 +82,24 @@ namespace AstonEcole.Web
             {
                 Course newCourse = new Course();
                 newCourse.Students = new List<Student>();
-                apiClientCourse.AddCourse(newCourse);
-                DisplayCourseDetails(newCourse);
+                DisplayCourseDetails(apiClientCourse.AddCourse(newCourse));
             }
         }
 
         protected void SaveCourse_Click(object sender, EventArgs e)
         {
-            //int idSelectedCourse = int.Parse(hidIdCourse.Value);
-            //Course selectedCourse;
-            //using (AstonApiClientCourse apiClientCourse = new AstonApiClientCourse())
-            //{
-            //    if (idSelectedCourse == 0)
-            //    {
-            //        selectedCourse = apiClientCourse.CreateCourse();
-            //    }
-            //    else
-            //    {
-            //        selectedCourse = svc.LoadCourse(idSelectedCourse);
-            //    }
+        //    int idSelectedCourse = int.Parse(hidIdCourse.Value);
+        //    Course selectedCourse;
+        //    using (CoursesServices svc = new CoursesServices())
+        //    {
+        //        if (idSelectedCourse == 0)
+        //        {
+        //            selectedCourse = svc.CreateCourse();
+        //        }
+        //        else
+        //        {
+        //            selectedCourse = svc.LoadCourse(idSelectedCourse);
+        //        }
 
             //    // Le sujet
             //    selectedCourse.Subject = txtCourseSubject.Text;
@@ -121,8 +120,8 @@ namespace AstonEcole.Web
 
             //    svc.UpdateStudents(selectedCourse, selectedStudents);
 
-            //    svc.Save();
-            //}
+        //        svc.Save();
+        //    }
         }
     }
 }
