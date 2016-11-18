@@ -33,7 +33,7 @@ namespace AstonEcole.Api.Controllers
         [ResponseType(typeof(IEnumerable<CourseWithNbStudents>))]
         public IHttpActionResult GetCoursesNBStudents()
         {
-            return Ok(Service.LoadCoursesWithNbStudents().Select(c => c.NbStudents));
+            return Ok(Service.LoadCoursesWithNbStudents());
         }
 
         [HttpGet]

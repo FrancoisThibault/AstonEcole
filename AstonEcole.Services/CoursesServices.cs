@@ -31,12 +31,12 @@ namespace AstonEcole.Services
 
         public Course LoadCourse(int id)
         {
-            return Context.Courses.Include(c => c.Teacher).Include(c => c.Students).Single(c => c.Id == id);
+            return Context.Courses.Include(c => c.Teacher).Single(c => c.Id == id);
         }
 
         public IEnumerable<CourseWithNbStudents> LoadCoursesWithNbStudents()
         {
-            return Context.Courses.Include(c => c.Teacher).Include(c => c.Students).ToList()
+            return Context.Courses.Include(c => c.Teacher).ToList()
                 .Select(c => new CourseWithNbStudents() { Course = c, NbStudents = c.Students.Count });
         }
 
