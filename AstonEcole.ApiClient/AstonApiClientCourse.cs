@@ -31,7 +31,7 @@ namespace AstonEcole.ApiClient
             return GetAsync<List<CourseWithNbStudents>>($"api/Courses/NbEleves");
         }
 
-        public void UpdateCourse(Course cours) // { Mise à jour des cours }
+        public void UpdateCourse(Course cours) 
         {
             astonSvc.PutAsJsonAsync<Course>($"api/Courses/{cours.Id}", cours).Wait();
         }

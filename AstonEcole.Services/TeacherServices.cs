@@ -25,6 +25,7 @@ namespace AstonEcole.Services
             return Context.Teachers.Where(filter);
         }
 
+        
         public Teacher LoadTeacher(int id)
         {
             return LoadTeacher(t => t.Id == id);
@@ -56,6 +57,8 @@ namespace AstonEcole.Services
 
             selectedCourses.Where(id => !teacher.Courses.Any(c => c.Id == id)).ToList()
                 .ForEach(id => teacher.Courses.Add(Context.Courses.Single(c => c.Id == id)));
+
+            Save();
         }
 
 
