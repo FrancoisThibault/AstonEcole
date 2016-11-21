@@ -201,6 +201,7 @@
     <Content Include="Students.aspx" />
     <Content Include="Students.html" />
     <Content Include="Teachers.aspx" />
+    <Content Include="TeachersJQ.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -272,6 +273,13 @@
     </Compile>
     <Compile Include="Teachers.aspx.designer.cs">
       <DependentUpon>Teachers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeachersJQ.aspx.cs">
+      <DependentUpon>TeachersJQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeachersJQ.aspx.designer.cs">
+      <DependentUpon>TeachersJQ.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
