@@ -10,7 +10,7 @@
 namespace AstonEcole.Web {
     
     
-    public partial class Teachers {
+    public partial class TeachersJQ {
         
         /// <summary>
         /// Contrôle form1.
@@ -47,24 +47,6 @@ namespace AstonEcole.Web {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTeacherName;
-        
-        /// <summary>
-        /// Contrôle gridCourses.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridCourses;
-        
-        /// <summary>
-        /// Contrôle SaveTeacher.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SaveTeacher;
         
         /// <summary>
         /// Contrôle monSpan.

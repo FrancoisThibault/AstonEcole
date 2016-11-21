@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Courses.aspx" />
+    <Content Include="Course_jQuery.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -201,6 +202,7 @@
     <Content Include="Students.html" />
     <Content Include="StudentsJQuery.aspx" />
     <Content Include="Teachers.aspx" />
+    <Content Include="TeachersJQ.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -220,6 +222,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Courses.aspx.cs">
@@ -228,6 +231,13 @@
     </Compile>
     <Compile Include="Courses.aspx.designer.cs">
       <DependentUpon>Courses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Course_jQuery.aspx.cs">
+      <DependentUpon>Course_jQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Course_jQuery.aspx.designer.cs">
+      <DependentUpon>Course_jQuery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -271,6 +281,13 @@
     </Compile>
     <Compile Include="Teachers.aspx.designer.cs">
       <DependentUpon>Teachers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeachersJQ.aspx.cs">
+      <DependentUpon>TeachersJQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeachersJQ.aspx.designer.cs">
+      <DependentUpon>TeachersJQ.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
