@@ -10,7 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <br />
+        <br />
         <br />
         <div>
             <asp:GridView ID="gridTeachers" runat="server" AutoGenerateColumns="False" DataKeyNames="TeacherId" >
@@ -23,19 +23,13 @@
         <br />
             <asp:HiddenField ID="hidTeacherId" runat="server" />
             <asp:TextBox ID="txtTeacherName" runat="server"></asp:TextBox>
-            
+        </div>
         <br />
         <br />
+        <div>
         <span id="monSpan" runat="server"></span>
+        <ul id="teachers"></ul>
        </div>
-              <script>
-                $(document).ready(function () {
-                    var grid = $("#gridTeachers");
-                    $("td", grid).on("click", function () {
-                        $("#monSpan").text((this).parentElement.firstElementChild.innerText);
-                    });
-                });
-             </script>
     </form>
 </body>
 </html>
