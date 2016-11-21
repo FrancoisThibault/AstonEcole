@@ -51,7 +51,8 @@
             $getJSON("http://localhost:56089/api/Courses")
                 .done(function (data) { 
                     // Sur le succès, 'les données' contiennent une liste de cours.
-                    $.each(data, function (key, item) {  });
+                    $.each(data, function (key, item) { });
+
                 });
         });
 
