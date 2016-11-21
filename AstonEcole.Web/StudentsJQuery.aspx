@@ -1,15 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="AstonEcole.Web.Students" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentsJQuery.aspx.cs" Inherits="AstonEcole.Web.StudentsJQuery" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="Scripts/jquery-1.10.2.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+     <script src="Scripts/jquery-1.10.2.js"></script>
     <title></title>
 </head>
 <body>
     <script>
+       
         $(document).ready(function () {
 
             // On passe par l'API du projet Api
@@ -77,7 +78,7 @@
             //});
 
             // récuperer l'id du 1er td quand clic sur la ligne tr
-           var grid = $("#GridViewStudents");
+            var grid = $("#GridViewStudents");
             $("tr", grid).on("click", function () {
                 $("#monSpan").text(($("td:first",this)).text());
             });
@@ -91,61 +92,36 @@
 
         });
     </script>
-
+ 
     <form id="form1" runat="server">
-
+    <div>
+    
+        <asp:GridView ID="GridViewStudents" runat="server"  OnPreRender="GridViewStudents_PreRender"  AutoGenerateColumns="false" >
+            <Columns>
+                    <asp:BoundField HeaderText="Id Student" DataField="Id" />
+                    <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
+                    <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
+                </Columns>
+        </asp:GridView>
+    
+    </div>
         <div>
-            <input type="button" id="quand" value="Quel jour sommes-nous ?" />
+             <input type="button" id="quand" value="Quel jour sommes-nous ?" />
             <span id="txtDateJour"></span>
             <input type="button" id="getStudents" value="Récupérer les élèves..." />
             <ul id="students"></ul>
-
+            
             <input type="button" id="VoirEleve1" value="Quel est le nom de l'étudiant 1 ?" />
             <input type="button" id="VoirEleve2" value="Quel est le nom de l'étudiant 2 ?" />
             <input type="button" id="VoirEleve3" value="Quel est le nom de l'étudiant 3 ?" />
             <input type="button" id="VoirEleve" value="Quel est le nom de l'étudiant ?" />
             <input type="text" id="quelIdEleve" />
             <span id="txtNomEleve"></span>
+                  
              <span id="monSpan"></span>
 
-        </div>
-      
-
-
-        <div>
-
-            <asp:GridView ID="GridViewStudents" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewStudents_SelectedIndexChanged" OnPreRender="GridViewStudents_PreRender">
-                <Columns>
-                    <asp:BoundField HeaderText="Id Student" DataField="Id" />
-                    <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
-                    <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
-
-                    <asp:CommandField SelectText="Voir" ShowSelectButton="true" />
-
-                </Columns>
-            </asp:GridView>
-
-            <asp:TextBox ID="TextBoxNomEleve" runat="server"></asp:TextBox>
 
         </div>
-
-
-
-        <div>
-            <asp:GridView ID="GridViewListeCours" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridViewListeCours_RowDataBound">
-                <Columns>
-                    <asp:BoundField HeaderText="Id Cours" DataField="Id" />
-                    <asp:BoundField HeaderText="Sujet Cours" DataField="Subject" />
-                    <asp:CheckBoxField HeaderText="Assiste" DataField="Assiste" />
-
-                </Columns>
-            </asp:GridView>
-        </div>
-
-        <div>
-            <asp:Button runat="server" ID="ButtonValider" Text="Valider" OnClick="ButtonValider_Click" />
-        </div>
-
     </form>
 </body>
 </html>

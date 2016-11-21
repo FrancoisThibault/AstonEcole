@@ -200,6 +200,7 @@
     <Content Include="Site.Master" />
     <Content Include="Students.aspx" />
     <Content Include="Students.html" />
+    <Content Include="StudentsJQuery.aspx" />
     <Content Include="Teachers.aspx" />
     <Content Include="TeachersJQ.aspx" />
     <Content Include="Web.config">
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="Students.aspx.designer.cs">
       <DependentUpon>Students.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentsJQuery.aspx.cs">
+      <DependentUpon>StudentsJQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentsJQuery.aspx.designer.cs">
+      <DependentUpon>StudentsJQuery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Teachers.aspx.cs">
       <DependentUpon>Teachers.aspx</DependentUpon>
