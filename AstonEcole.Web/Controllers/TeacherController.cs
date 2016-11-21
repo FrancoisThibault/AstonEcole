@@ -1,5 +1,4 @@
-﻿using AstonEcole.Api.Infrastructure;
-using AstonEcole.ApiClient;
+﻿using AstonEcole.ApiClient;
 using AstonEcole.DTO;
 using AstonEcole.Services;
 using System;
@@ -13,7 +12,7 @@ using System.Web.Http.Description;
 namespace AstonEcole.Web.Controllers
 {
     [RoutePrefix("api/Teachers")]
-    public class TeacherController : BaseApiController<TeacherServices>
+    public class TeacherController : ApiController
     {
         AstonApiClientTeacher monAstonApiClientTeacher;
     

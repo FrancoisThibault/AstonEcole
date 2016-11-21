@@ -34,6 +34,10 @@
         </div>
 
         <h4>Détail du cours</h4>
+        <input type="button" id="getCourse" value="Récupérer les élèves..." />
+        <ul id="Courses"></ul>
+        <%--        <input type="button" id="quand" value="Quel jour sommes-nous ?" />
+        <span id="txtDateJour"></span>--%>
     </form>
     <script>
         $(document).ready(function () {
@@ -48,36 +52,43 @@
 
         $(document).ready(function () {
             // Envoyez une demande(requête) d'AJAX
-            $getJSON("http://localhost:56089/api/Courses")
-                .done(function (data) { 
-                    // Sur le succès, 'les données' contiennent une liste de cours.
-                    $.each(data, function (key, item) { });
-                        // Ajoutez une liste de cours pour le produit.
-                });
-        });
 
-        //AUTRE ...
-        $(document).ready(function () {
-            // Envoyez une demande(requête) d'AJAX
-            $("#getStudents").click(function () {
-                $.getJSON("http://localhost:56089/api/Students")
+            var grid2 = $("#gridCourses");
+
+            $("#getCourse").click(function () {
+                $.getJSON("http://localhost:56089/api/Courses")
                     .done(function (data) {
-                        // Sur le succès, 'les données' contiennent une liste de produits.
+                        // Sur le succès, 'les données' contiennent une liste de cours.
                         $.each(data, function (key, item) {
-                            // Ajoutez un article de liste pour le produit.
-                            $('<li>', { text: item.FirstName }).appendTo($('#students'));
+                            // Ajoutez une liste de cours pour le produit.
+                            $('<li>', { text: item }).appendTo($('#Courses'));
                         });
                     })
             });
-
-            $("#quand").click(function () {
-                $.getJSON("http://localhost:51767/api/Test")
-                    .done(function (data) {
-                        // On success, 'data' contains a list of products.
-                        $("#txtDateJour").text(data);
-                    })
-            });
         });
+
+        ////AUTRE ...
+        //$(document).ready(function () {
+        //    // Envoyez une demande(requête) d'AJAX
+        //    $("#getStudents").click(function () {
+        //        $.getJSON("http://localhost:56089/api/Students")
+        //            .done(function (data) {
+        //                // Sur le succès, 'les données' contiennent une liste de produits.
+        //                $.each(data, function (key, item) {
+        //                    // Ajoutez un article de liste pour le produit.
+        //                    $('<li>', { text: item.FirstName }).appendTo($('#students'));
+        //                });
+        //            })
+        //    });
+
+        //    $("#quand").click(function () {
+        //        $.getJSON("http://localhost:51767/api/Test")
+        //            .done(function (data) {
+        //                // On success, 'data' contains a list of products.
+        //                $("#txtDateJour").text(data);
+        //            })
+        //    });
+        //});
     </script>
 </body>
 </html>
