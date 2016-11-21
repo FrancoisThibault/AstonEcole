@@ -29,10 +29,11 @@
 
         <br />
         <div>
-            <asp:DetailsView ID="DetailsView_jQuery" runat="server" Height="50px" Width="125px">
-
+            <asp:DetailsView ID="DetailsView_jQuery" runat="server" Height="50px" Width="125px" Visible="False">
             </asp:DetailsView>
         </div>
+
+        <h4>Détail du cours</h4>
     </form>
     <script>
         $(document).ready(function () {
@@ -46,19 +47,23 @@
         });
 
         $(document).ready(function () {
-            //Envoie une requête Ajax
-            $()
+            // Envoyez une demande(requête) d'AJAX
+            $getJSON("http://localhost:56089/api/Courses")
+                .done(function (data) { 
+                    // Sur le succès, 'les données' contiennent une liste de cours.
+                    $.each(data, function (key, item) {  });
+                });
         });
 
         //AUTRE ...
         $(document).ready(function () {
-            // Send an AJAX request
+            // Envoyez une demande(requête) d'AJAX
             $("#getStudents").click(function () {
                 $.getJSON("http://localhost:56089/api/Students")
                     .done(function (data) {
-                        // On success, 'data' contains a list of products.
+                        // Sur le succès, 'les données' contiennent une liste de produits.
                         $.each(data, function (key, item) {
-                            // Add a list item for the product.
+                            // Ajoutez un article de liste pour le produit.
                             $('<li>', { text: item.FirstName }).appendTo($('#students'));
                         });
                     })
