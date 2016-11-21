@@ -4,13 +4,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     <script src="Scripts/jquery-1.10.2.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
     <title></title>
 </head>
 <body>
     <script>
-       
+
         $(document).ready(function () {
 
             // On passe par l'API du projet Api
@@ -80,7 +80,7 @@
             // récuperer l'id du 1er td quand clic sur la ligne tr
             var grid = $("#GridViewStudents");
             $("tr", grid).on("click", function () {
-                $("#monSpan").text(($("td:first",this)).text());
+                $("#monSpan").text(($("td:first", this)).text());
             });
 
             //// récuperer l'id du 1er td quand clic sur la ligne tr
@@ -92,33 +92,49 @@
 
         });
     </script>
- 
+
     <form id="form1" runat="server">
-    <div>
-    
-        <asp:GridView ID="GridViewStudents" runat="server"  OnPreRender="GridViewStudents_PreRender"  AutoGenerateColumns="false" >
-            <Columns>
+        <div>
+
+            <asp:GridView ID="GridViewStudents" runat="server" OnPreRender="GridViewStudents_PreRender" AutoGenerateColumns="false">
+                <Columns>
                     <asp:BoundField HeaderText="Id Student" DataField="Id" />
                     <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
                     <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
                 </Columns>
-        </asp:GridView>
-    
-    </div>
+            </asp:GridView>
+
+        </div>
+
         <div>
-             <input type="button" id="quand" value="Quel jour sommes-nous ?" />
+
+
+            <asp:DetailsView ID="DetailsViewStudent" runat="server" AutoGenerateRows="False" Height="50px" Width="125px">
+                 <Fields>
+                <asp:BoundField DataField="Nom" HeaderText="Nom" ReadOnly="True"   />
+                <asp:BoundField DataField="Description" HeaderText="Description" ReadOnly="True"   />
+                <asp:ImageField DataImageUrlField="CheminImage" DataImageUrlFormatString="Images/{0}.png" HeaderText="Image">
+                </asp:ImageField>
+            </Fields>
+            </asp:DetailsView>
+
+
+        </div>
+
+        <div hidden="hidden">
+            <input type="button" id="quand" value="Quel jour sommes-nous ?" />
             <span id="txtDateJour"></span>
             <input type="button" id="getStudents" value="Récupérer les élèves..." />
             <ul id="students"></ul>
-            
+
             <input type="button" id="VoirEleve1" value="Quel est le nom de l'étudiant 1 ?" />
             <input type="button" id="VoirEleve2" value="Quel est le nom de l'étudiant 2 ?" />
             <input type="button" id="VoirEleve3" value="Quel est le nom de l'étudiant 3 ?" />
             <input type="button" id="VoirEleve" value="Quel est le nom de l'étudiant ?" />
             <input type="text" id="quelIdEleve" />
             <span id="txtNomEleve"></span>
-                  
-             <span id="monSpan"></span>
+
+            <span id="monSpan"></span>
 
 
         </div>
