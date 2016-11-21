@@ -1,5 +1,4 @@
-﻿//using AstonEcole.Api.Infrastructure;
-using AstonEcole.ApiClient;
+﻿using AstonEcole.ApiClient;
 using AstonEcole.DTO;
 using AstonEcole.Services;
 using System;
