@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Courses.aspx" />
+    <Content Include="Course_jQuery.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -199,6 +200,7 @@
     <Content Include="Site.Master" />
     <Content Include="Students.aspx" />
     <Content Include="Students.html" />
+    <Content Include="StudentsJQuery.aspx" />
     <Content Include="Teachers.aspx" />
     <Content Include="TeachersJQ.aspx" />
     <Content Include="Web.config">
@@ -231,6 +233,13 @@
     <Compile Include="Courses.aspx.designer.cs">
       <DependentUpon>Courses.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Course_jQuery.aspx.cs">
+      <DependentUpon>Course_jQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Course_jQuery.aspx.designer.cs">
+      <DependentUpon>Course_jQuery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +268,13 @@
     </Compile>
     <Compile Include="Students.aspx.designer.cs">
       <DependentUpon>Students.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentsJQuery.aspx.cs">
+      <DependentUpon>StudentsJQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentsJQuery.aspx.designer.cs">
+      <DependentUpon>StudentsJQuery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Teachers.aspx.cs">
       <DependentUpon>Teachers.aspx</DependentUpon>

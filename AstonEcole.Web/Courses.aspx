@@ -22,7 +22,9 @@
             </asp:GridView>
             <asp:Button ID="NewCourse" runat="server" OnClick="NewCourse_Click" Text="Nouveau cours" />
         </div>
+
         <span id="monSpan"></span>
+
         <div>
             <asp:HiddenField ID="hidIdCourse" runat="server" />
             <asp:TextBox ID="txtCourseSubject" runat="server"></asp:TextBox>
@@ -37,11 +39,20 @@
         </div>
     </form>
     <script>
+        //$(document).ready(function () {
+
+        //    var grid = $("#gridCourses");
+        //    $("tr", grid).on("click", function () {
+        //        $("#monSpan").text($("td:first", this).text());
+        //    });
+
+        //});
+
         $(document).ready(function () {
 
             var grid = $("#gridCourses");
             $("td", grid).on("click", function () {
-                $("#monSpan").text((this).innerText);
+                $("#monSpan").text((this).parentElement.firstElementChild.innerText);
             });
 
         });
