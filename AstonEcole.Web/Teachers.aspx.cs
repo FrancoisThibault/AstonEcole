@@ -12,8 +12,8 @@ namespace AstonEcole.Web
 {
     public partial class Teachers : AstonPage
     {
-        private AstonApiClientTeacher _ClientTeacher;// = GetApiClient<AstonApiClientTeacher>(); // new AstonApiClientTeacher();
-        private AstonApiClientCourse _ClientCourse;// = new AstonApiClientCourse();
+        private AstonApiClientTeacher _ClientTeacher;
+        private AstonApiClientCourse _ClientCourse;
 
         protected void Page_Load(object sender, EventArgs e)
         {

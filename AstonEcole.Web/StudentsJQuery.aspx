@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="AstonEcole.Web.Students" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentsJQuery.aspx.cs" Inherits="AstonEcole.Web.StudentsJQuery" %>
 
 <!DOCTYPE html>
 
@@ -10,6 +10,7 @@
 </head>
 <body>
     <script>
+
         $(document).ready(function () {
 
             // On passe par l'API du projet Api
@@ -77,9 +78,9 @@
             //});
 
             // récuperer l'id du 1er td quand clic sur la ligne tr
-           var grid = $("#GridViewStudents");
+            var grid = $("#GridViewStudents");
             $("tr", grid).on("click", function () {
-                $("#monSpan").text(($("td:first",this)).text());
+                $("#monSpan").text(($("td:first", this)).text());
             });
 
             //// récuperer l'id du 1er td quand clic sur la ligne tr
@@ -93,8 +94,34 @@
     </script>
 
     <form id="form1" runat="server">
+        <div>
+
+            <asp:GridView ID="GridViewStudents" runat="server" OnPreRender="GridViewStudents_PreRender" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField HeaderText="Id Student" DataField="Id" />
+                    <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
+                    <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
+                </Columns>
+            </asp:GridView>
+
+        </div>
 
         <div>
+
+
+            <asp:DetailsView ID="DetailsViewStudent" runat="server" AutoGenerateRows="False" Height="50px" Width="125px">
+                 <Fields>
+                <asp:BoundField DataField="Nom" HeaderText="Nom" ReadOnly="True"   />
+                <asp:BoundField DataField="Description" HeaderText="Description" ReadOnly="True"   />
+                <asp:ImageField DataImageUrlField="CheminImage" DataImageUrlFormatString="Images/{0}.png" HeaderText="Image">
+                </asp:ImageField>
+            </Fields>
+            </asp:DetailsView>
+
+
+        </div>
+
+        <div hidden="hidden">
             <input type="button" id="quand" value="Quel jour sommes-nous ?" />
             <span id="txtDateJour"></span>
             <input type="button" id="getStudents" value="Récupérer les élèves..." />
@@ -106,46 +133,11 @@
             <input type="button" id="VoirEleve" value="Quel est le nom de l'étudiant ?" />
             <input type="text" id="quelIdEleve" />
             <span id="txtNomEleve"></span>
-             <span id="monSpan"></span>
+
+            <span id="monSpan"></span>
+
 
         </div>
-      
-
-
-        <div>
-
-            <asp:GridView ID="GridViewStudents" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewStudents_SelectedIndexChanged" OnPreRender="GridViewStudents_PreRender">
-                <Columns>
-                    <asp:BoundField HeaderText="Id Student" DataField="Id" />
-                    <asp:BoundField HeaderText="Nom Student" DataField="NomStudent" />
-                    <asp:BoundField HeaderText="Nombre Cours" DataField="NbCours" />
-
-                    <asp:CommandField SelectText="Voir" ShowSelectButton="true" />
-
-                </Columns>
-            </asp:GridView>
-
-            <asp:TextBox ID="TextBoxNomEleve" runat="server"></asp:TextBox>
-
-        </div>
-
-
-
-        <div>
-            <asp:GridView ID="GridViewListeCours" DataKeyNames="Id" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridViewListeCours_RowDataBound">
-                <Columns>
-                    <asp:BoundField HeaderText="Id Cours" DataField="Id" />
-                    <asp:BoundField HeaderText="Sujet Cours" DataField="Subject" />
-                    <asp:CheckBoxField HeaderText="Assiste" DataField="Assiste" />
-
-                </Columns>
-            </asp:GridView>
-        </div>
-
-        <div>
-            <asp:Button runat="server" ID="ButtonValider" Text="Valider" OnClick="ButtonValider_Click" />
-        </div>
-
     </form>
 </body>
 </html>
