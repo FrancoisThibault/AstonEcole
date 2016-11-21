@@ -20,13 +20,9 @@ namespace AstonEcole.Web
 
         protected void GridViewStudents_PreRender(object sender, EventArgs e)
         {
-
-
            // List<Student> ListStudents = GetApiClient<AstonApiClientStudent>().GetStudents();
 
-            List<StudentNbCours> ListStudents = GetApiClient<AstonApiClientStudent>().GetStudentsWithNbCours();
-
-            
+            List<StudentNbCours> ListStudents = GetApiClient<AstonApiClientStudent>().GetStudentsWithNbCours();            
 
             var listeStudents = ListStudents.ToList()
                .Select(eleve => new
@@ -57,6 +53,7 @@ namespace AstonEcole.Web
             GridViewListeCours.DataBind();
         }
 
+        // rendre les checkbox éditables
         protected void GridViewListeCours_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             // si c'est une ligne de données et pas en-tête 
