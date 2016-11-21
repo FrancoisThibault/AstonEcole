@@ -52,7 +52,7 @@
                 .done(function (data) { 
                     // Sur le succès, 'les données' contiennent une liste de cours.
                     $.each(data, function (key, item) { });
-
+                        // Ajoutez une liste de cours pour le produit.
                 });
         });
 
