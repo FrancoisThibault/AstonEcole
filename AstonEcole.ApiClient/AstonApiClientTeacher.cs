@@ -12,7 +12,6 @@ namespace AstonEcole.ApiClient
 {
     public class AstonApiClientTeacher : AstonApiClient
     {
-
         public Teacher getTeacher(int id)
         {
             return GetAsync<Teacher>($"api/Teachers/{id}");

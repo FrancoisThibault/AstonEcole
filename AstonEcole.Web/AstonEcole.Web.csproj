@@ -224,6 +224,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Courses.aspx.cs">
       <DependentUpon>Courses.aspx</DependentUpon>
@@ -298,9 +299,17 @@
       <Project>{F250AACF-F695-4728-AB39-03C075038189}</Project>
       <Name>AstonEcole.ApiClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AstonEcole.Api\AstonEcole.Api.csproj">
+      <Project>{DCF8FAEF-82D1-4A3B-8A82-3384C8C2E660}</Project>
+      <Name>AstonEcole.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AstonEcole.DTO\AstonEcole.DTO.csproj">
       <Project>{37680ac6-bbbb-440e-80b2-283a5258c875}</Project>
       <Name>AstonEcole.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AstonEcole.Services\AstonEcole.Services.csproj">
+      <Project>{32A14243-2FE4-4664-BC92-EC1A29FEBA84}</Project>
+      <Name>AstonEcole.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
