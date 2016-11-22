@@ -7,13 +7,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="Content/StyleSheetCourse.css" />
 </head>
 <body>
     <form id="form1" runat="server">
         <br />
         <br />
         <div>
-            <asp:GridView ID="gridTeachers" runat="server" AutoGenerateColumns="False" DataKeyNames="TeacherId" OnSelectedIndexChanged="gridTeachers_SelectedIndexChanged">
+            <asp:GridView ID="gridTeachers" runat="server" CssClass="Grid" AutoGenerateColumns="False" DataKeyNames="TeacherId" OnSelectedIndexChanged="gridTeachers_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="TeacherId" />
                     <asp:BoundField HeaderText="Nom" DataField="TeacherName" />
@@ -26,7 +27,7 @@
         <div>
             <asp:HiddenField ID="hidTeacherId" runat="server" />
             <asp:TextBox ID="txtTeacherName" runat="server"></asp:TextBox>
-            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="False" DataKeyNames="CourseId" OnRowDataBound="gridCourses_RowDataBound">
+            <asp:GridView ID="gridCourses" runat="server"  CssClass="Grid" AutoGenerateColumns="False" DataKeyNames="CourseId" OnRowDataBound="gridCourses_RowDataBound">
                 <Columns>
                     <asp:BoundField HeaderText="Nom" DataField="CourseName" />
                     <asp:CheckBoxField HeaderText="Assigné" DataField="IsSelected" ReadOnly="False" />
