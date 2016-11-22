@@ -12,11 +12,11 @@ using System.Web.Http.Description;
 namespace AstonEcole.Web.Controllers
 {
     [RoutePrefix("api/Teachers")]
-    public class TeacherController : ApiController
+    public class TeachersController : ApiController
     {
         AstonApiClientTeacher monAstonApiClientTeacher;
     
-        public TeacherController()
+        public TeachersController()
         {
             monAstonApiClientTeacher = new AstonApiClientTeacher();
         }

@@ -13,87 +13,34 @@
 
         $(document).ready(function () {
 
-            // On passe par l'API du projet Api
-            $("#getStudents").click(function () {
-                $.getJSON("http://localhost:56089/api/Students")
-                    .done(function (data) {
-                        // On success, 'data' contains a list of students
-                        $.each(data, function (key, item) {
-                            // Add a list item for the product.
-                            $('<li>', { text: item.FirstName }).appendTo($('#students'));
-                        });
-                    })
-            });
-
-            // on passe par l'API du projet Web
-            $("#quand").click(function () {
-                $.getJSON("http://localhost:51767/api/Test")
-                    .done(function (data) {
-                        // On success, 'data' contains la dae du jour
-                        $("#txtDateJour").text(data);
-                    })
-            });
-
-            // on passe par l'API du projet Web
-            $("#VoirEleve1").click(function () {
-                $.getJSON("http://localhost:51767/api/Students/1")
-                    .done(function (data) {
-                        // On success, 'data' contains la dae du jour
-                        $("#txtNomEleve").text(data.FirstName);
-                    })
-            });
-
-            // on passe par l'API du projet Web
-            $("#VoirEleve2").click(function () {
-                $.getJSON("http://localhost:51767/api/Students/2")
-                    .done(function (data) {
-                        // On success, 'data' contains la dae du jour
-                        $("#txtNomEleve").text(data.FirstName);
-                    })
-            });
-
-            // on passe par l'API du projet Web
-            $("#VoirEleve3").click(function () {
-                $.getJSON("http://localhost:51767/api/Students/3")
-                    .done(function (data) {
-                        // On success, 'data' contains la dae du jour
-                        $("#txtNomEleve").text(data.FirstName);
-                    })
-            });
-
-            // on passe par l'API du projet Web
-            $("#VoirEleve").click(function () {
-                var inputIdEleve = $("#quelIdEleve").val();
-                $.getJSON("http://localhost:51767/api/Students/" + inputIdEleve)
-                    .done(function (data) {
-                        // On success, 'data' contains la dae du jour
-                        $("#txtNomEleve").text(data.FirstName);
-                    })
-            });
-
-            //// récuperer le texte du td clicqué 
-            //var grid = $("#GridViewStudents");
-            //$("td", grid).on("click", function () {
-            //    $("#monSpan").text((this).innerText);
-            //});
+         
 
             // récuperer l'id du 1er td quand clic sur la ligne tr
             var grid = $("#GridViewStudents");
             $("tr", grid).on("click", function () {
-                $("#monSpan").text(($("td:first", this)).text());
-            });
-
-            //// récuperer l'id du 1er td quand clic sur la ligne tr
-            //var grid = $("#GridViewStudents");
-            //$("td", grid).on("click", function () {
-            //    $("#monSpan").text(((this.parentElement.firstElementChild )).innerText);
-            //});
+                var idEleve = $("td:first", this).text();
+                $("#monSpan").text(" idEleve :" + idEleve);
+                $.getJSON("http://localhost:51767/api/Students/" + idEleve)
+                    .done(function (data) {
+                        // On success, 'data' contains l'eleve sélectionné
+                        // $("#inputNomEleve").text(data.FirstName);
+                        // $("#inputNomEleve").visible = true;
+                        $("#inputNomEleve").val(data.FirstName);
+                    });
+            })
 
 
         });
+
+
+
     </script>
 
     <form id="form1" runat="server">
+        <div>
+             <label>Liste des étudiants</label>
+        </div>
+
         <div>
 
             <asp:GridView ID="GridViewStudents" runat="server" OnPreRender="GridViewStudents_PreRender" AutoGenerateColumns="false">
@@ -106,37 +53,24 @@
 
         </div>
 
+       
+
+            <div>
+                <label>Nom Etudiant</label>
+                <input id="inputNomEleve" />
+            </div>
+
+          
+      
         <div>
-
-
-            <asp:DetailsView ID="DetailsViewStudent" runat="server" AutoGenerateRows="False" Height="50px" Width="125px">
-                 <Fields>
-                <asp:BoundField DataField="Nom" HeaderText="Nom" ReadOnly="True"   />
-                <asp:BoundField DataField="Description" HeaderText="Description" ReadOnly="True"   />
-                <asp:ImageField DataImageUrlField="CheminImage" DataImageUrlFormatString="Images/{0}.png" HeaderText="Image">
-                </asp:ImageField>
-            </Fields>
-            </asp:DetailsView>
-
-
+            <span id="monSpan"></span>
         </div>
 
-        <div hidden="hidden">
-            <input type="button" id="quand" value="Quel jour sommes-nous ?" />
-            <span id="txtDateJour"></span>
-            <input type="button" id="getStudents" value="Récupérer les élèves..." />
-            <ul id="students"></ul>
 
-            <input type="button" id="VoirEleve1" value="Quel est le nom de l'étudiant 1 ?" />
-            <input type="button" id="VoirEleve2" value="Quel est le nom de l'étudiant 2 ?" />
-            <input type="button" id="VoirEleve3" value="Quel est le nom de l'étudiant 3 ?" />
+        <div hidden="hidden">           
             <input type="button" id="VoirEleve" value="Quel est le nom de l'étudiant ?" />
             <input type="text" id="quelIdEleve" />
             <span id="txtNomEleve"></span>
-
-            <span id="monSpan"></span>
-
-
         </div>
     </form>
 </body>
