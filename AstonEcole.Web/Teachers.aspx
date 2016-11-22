@@ -15,7 +15,7 @@
         <br />
         <br />
         <button type="button" class="btn btn-lg btn-default">Acceuil</button>
-        <button type="button" class="btn btn-lg btn-primary">Teacher</button>
+        <button type="button" class="btn btn-lg btn-primary">Teacher</button> 
         <button type="button" class="btn btn-lg btn-success">Student</button>
         <button type="button" class="btn btn-lg btn-info">Course</button>
         <br />
