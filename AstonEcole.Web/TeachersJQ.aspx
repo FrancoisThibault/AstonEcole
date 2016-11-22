@@ -30,6 +30,9 @@
         <span id="monSpan" runat="server"></span>
         <ul id="teachers" runat="server"></ul>
        </div>
+        <br />
+        <a href="Teachers.aspx">Teachers</a>
+        <a href="index.aspx">Index</a>
 
         <script>
             $(document).ready(function () {
@@ -42,7 +45,6 @@
                         $.getJSON(WebCallAPI).done(function (data) {
                             // On success, 'data' contains a list of products.
                             
-                                // Add a list item for the product.
                             $('<li>', { text: data.Name }).appendTo($('#teachers'));
                             
                         })

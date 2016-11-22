@@ -37,6 +37,12 @@
 
         <br />
         <span id="monSpan" runat="server"></span>
+
+        <br />
+
+        <a href="TeachersJQ.aspx">TeachersJQ</a>
+        <a href="index.aspx">Index</a>
+
         <br />
             <input type="button" id="getEleves" value="Récupérer les élèves..." />
             <ul id="teachers"></ul>
