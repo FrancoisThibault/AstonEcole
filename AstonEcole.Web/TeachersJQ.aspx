@@ -7,13 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="Content/StyleSheetCourse.css" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />  
 </head>
 <body>
     <form id="form1" runat="server">
         <br />
         <br />
+        <button type="button" class="btn btn-lg btn-default">Acceuil</button>
+        <button type="button" class="btn btn-lg btn-primary">Teacher</button>
+        <button type="button" class="btn btn-lg btn-success">Student</button>
+        <button type="button" class="btn btn-lg btn-info">Course</button>
+        <br />
+        <br />
         <div>
-            <asp:GridView ID="gridTeachers" runat="server" AutoGenerateColumns="False" DataKeyNames="TeacherId" >
+            <asp:GridView ID="gridTeachers" runat="server"  CssClass="table table-hover table-striped" AutoGenerateColumns="False" DataKeyNames="TeacherId" >
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="TeacherId" />
                     <asp:BoundField HeaderText="Nom" DataField="TeacherName" />
