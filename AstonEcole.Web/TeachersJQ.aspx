@@ -37,12 +37,14 @@
                     $("td", grid).on("click", function () {
 
                         $("#monSpan").text((this).parentElement.firstElementChild.innerHTML);
-                        $.getJSON("http://localhost:51767/api/Teachers").done(function (data) {
+                        var WebCallAPI = "http://localhost:51767/api/Teachers/"+ ((this).parentElement.firstElementChild.innerHTML);
+                        
+                        $.getJSON(WebCallAPI).done(function (data) {
                             // On success, 'data' contains a list of products.
-                            $.each(data, function (key, item) {
+                            
                                 // Add a list item for the product.
-                                $('<li>', { text: item.Name }).appendTo($('#teachers'));
-                            });
+                            $('<li>', { text: data.Name }).appendTo($('#teachers'));
+                            
                         })
                     });         
             });
