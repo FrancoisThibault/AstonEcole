@@ -28,8 +28,25 @@
         <br />
         <div>
         <span id="monSpan" runat="server"></span>
-        <ul id="teachers"></ul>
+        <ul id="teachers" runat="server"></ul>
        </div>
+
+        <script>
+            $(document).ready(function () {
+                    var grid = $("#gridTeachers");
+                    $("td", grid).on("click", function () {
+
+                        $("#monSpan").text((this).parentElement.firstElementChild.innerHTML);
+                        $.getJSON("http://localhost:51767/api/Teachers").done(function (data) {
+                            // On success, 'data' contains a list of products.
+                            $.each(data, function (key, item) {
+                                // Add a list item for the product.
+                                $('<li>', { text: item.Name }).appendTo($('#teachers'));
+                            });
+                        })
+                    });         
+            });
+            </script>
     </form>
 </body>
 </html>
