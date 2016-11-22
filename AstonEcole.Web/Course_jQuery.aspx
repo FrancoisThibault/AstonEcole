@@ -5,48 +5,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link rel="stylesheet" type="text/css" href="Content/StyleSheetCourse.css" />
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
     <form id="form_CoursejQuery" runat="server">
-        <div>
-            <h3>Liste des cours</h3>
-        </div>
-        <div>
-            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" CssClass="Grid">
-                <Columns>
-                    <asp:BoundField HeaderText="Id" DataField="CourseId" />
-                    <asp:BoundField HeaderText="Sujet" DataField="Subject" />
-                    <asp:BoundField HeaderText="Enseignant" DataField="TeacherName" />
-                    <asp:BoundField HeaderText="Nb. Elèves" DataField="NbStudents" />
-                </Columns>
-            </asp:GridView>
 
-        </div>
-        <div></div>
-        <span id="monSpan"></span>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--Pour plus d'informations sur les scripts de regroupement dans ScriptManager, consultez http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Scripts Framework--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Scripts de site--%>
+            </Scripts>
+        </asp:ScriptManager>
 
-        <br />
-        <div>
-            <%--            <asp:DetailsView ID="DetailsView_jQuery" runat="server" Height="50px" Width="125px" Visible="False">--%>
-<%--            <asp:DetailsView ID="DetailsView_jQuery" runat="server" AutoGenerateRows="False" DataKeyNames="ProductID" DataSourceID="ObjectDataSource1"
-                AllowPaging="True" EnableViewState="False">
+        <div class="container body-content">
+            <h2>Bienvenue sur ma page cours de mon Application Web</h2>
 
-            </asp:DetailsView>--%>
+            <div>
+                <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" CssClass="Grid">
+                    <Columns>
+                        <asp:BoundField HeaderText="Id" DataField="CourseId" />
+                        <asp:BoundField HeaderText="Sujet" DataField="Subject" />
+                        <asp:BoundField HeaderText="Enseignant" DataField="TeacherName" />
+                        <asp:BoundField HeaderText="Nb. Elèves" DataField="NbStudents" />
+                    </Columns>
+                </asp:GridView>
+
+            </div>
+
+            <%--            <span id="monSpan"></span>--%>
+            <br />
+            <h4>Détail du cours</h4>
+            <div>
+                <ul id="details"></ul>
+            </div>
+            <br />
+            <a href="Courses.aspx">Retour</a>
+            <br />
+            <br />
+            <a href="Index.aspx">Accueil</a>
         </div>
 
-        <h4>Détail du cours</h4>
-        <div>
-            <ul id="details"></ul>
+        <div class="container body-content">
+            <%--            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>--%>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Mon ASP.NET Application</p>
+            </footer>
         </div>
-        <br />
-        <a href="Courses.aspx">Retour</a>
-        <br />
-        <br />
-        <a href="Index.aspx">Accueil</a>
     </form>
+
     <script>
 
         $(document).ready(function () {
