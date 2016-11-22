@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="Content/StyleSheetCourse.css" />
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
 </head>
@@ -12,7 +13,8 @@
     <form id="form1" runat="server">
         <div>
             <br />
-            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" OnSelectedIndexChanged="gridCourses_SelectedIndexChanged">
+            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" OnSelectedIndexChanged="gridCourses_SelectedIndexChanged"
+                CssClass="Grid">
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="CourseId" />
                     <asp:BoundField HeaderText="Sujet" DataField="Subject" />
@@ -34,7 +36,9 @@
             <asp:TextBox ID="txtCourseSubject" runat="server"></asp:TextBox>
             <asp:DropDownList ID="ddlTeachers" runat="server" DataValueField="TeacherId" DataTextField="TeacherName"></asp:DropDownList>
             <br />
-            <asp:GridView ID="gridStudents" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId" OnRowDataBound="gridStudents_RowDataBound">
+            <br />
+            <asp:GridView ID="gridStudents" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId" OnRowDataBound="gridStudents_RowDataBound"
+                CssClass="Grid">
                 <Columns>
                     <asp:BoundField HeaderText="Nom" DataField="StudentName" />
                     <asp:CheckBoxField DataField="IsSelected" ReadOnly="false" />

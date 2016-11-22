@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="Content/StyleSheetCourse.css" />
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
 </head>
@@ -14,7 +15,7 @@
             <h3>Liste des cours</h3>
         </div>
         <div>
-            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId">
+            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="false" DataKeyNames="CourseId" CssClass="Grid">
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="CourseId" />
                     <asp:BoundField HeaderText="Sujet" DataField="Subject" />
