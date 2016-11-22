@@ -40,6 +40,11 @@
         <div>
             <ul id="details"></ul>
         </div>
+        <br />
+        <a href="Courses.aspx">Retour</a>
+        <br />
+        <br />
+        <a href="Index.aspx">Accueil</a>
     </form>
     <script>
 
