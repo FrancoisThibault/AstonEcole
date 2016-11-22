@@ -29,40 +29,41 @@
 
         <br />
         <div>
-            <asp:DetailsView ID="DetailsView_jQuery" runat="server" Height="50px" Width="125px" Visible="False">
-            </asp:DetailsView>
+            <%--            <asp:DetailsView ID="DetailsView_jQuery" runat="server" Height="50px" Width="125px" Visible="False">--%>
+<%--            <asp:DetailsView ID="DetailsView_jQuery" runat="server" AutoGenerateRows="False" DataKeyNames="ProductID" DataSourceID="ObjectDataSource1"
+                AllowPaging="True" EnableViewState="False">
+
+            </asp:DetailsView>--%>
         </div>
 
         <h4>Détail du cours</h4>
-        <input type="button" id="getCourse" value="Récupérer les élèves..." />
-        <ul id="Courses"></ul>
-        <%--        <input type="button" id="quand" value="Quel jour sommes-nous ?" />
-        <span id="txtDateJour"></span>--%>
+        <div>
+            <ul id="details"></ul>
+        </div>
     </form>
     <script>
-        $(document).ready(function () {
-
-            var grid = $("#gridCourses");
-            $("td", grid).on("click", function () {
-                $("#monSpan").text((this).parentElement.firstElementChild.innerText);
-
-            });
-
-        });
 
         $(document).ready(function () {
             // Envoyez une demande(requête) d'AJAX
+            var gridQuery = $("#gridCourses");
 
-            var grid2 = $("#gridCourses");
+            $("td", gridQuery).click(function () {
 
-            $("#getCourse").click(function () {
-                $.getJSON("http://localhost:56089/api/Courses")
+                //$("#monSpan").text((this).parentElement.firstElementChild.innerText);
+                var idCours = (this).parentElement.firstElementChild.innerText
+
+                $.getJSON("http://localhost:51767/api/Course/" + idCours)
                     .done(function (data) {
                         // Sur le succès, 'les données' contiennent une liste de cours.
-                        $.each(data, function (key, item) {
-                            // Ajoutez une liste de cours pour le produit.
-                            $('<li>', { text: item }).appendTo($('#Courses'));
-                        });
+                        $('<li>', { text: "< -- Le cours -- >" }).appendTo($('#details'));
+                        $('<li>', { text: "Id du Cours : " + data.Id }).appendTo($('#details'));
+                        $('<li>', { text: "Nom de la matière : " + data.Subject }).appendTo($('#details'));
+                        $('<br/>').appendTo($('#details'));
+                        $('<li>', { text: "< -- Le prof -- >" }).appendTo($('#details'));
+                        $('<li>', { text: "Id du professeur : " + data.Teacher.Id }).appendTo($('#details'));
+                        $('<li>', { text: "Nom du professeur : " + data.Teacher.Name }).appendTo($('#details'));
+                        $('<br/>').appendTo($('#details'));
+
                     })
             });
         });
