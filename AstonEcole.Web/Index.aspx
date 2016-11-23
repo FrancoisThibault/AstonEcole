@@ -2,25 +2,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Bienvenue sur notre Application Web POE SharePoint :)</h2>
     <div class="jumbotron text-center">
-  <h1>My First Bootstrap Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
+  <h1>Ecole du Numerique ASTON</h1>
+  <p>Ecole de formaion aux métiers du numrique de SQLI</p> 
 </div>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Teachers</h3>
+      <p>BASTARDIE Alain</p>
+      <p>THIBAULT François </p>
     </div>
     <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Courses</h3>
+      <p>Plateforme dot net</p>
+      <p>SharePoin</p>
     </div>
     <div class="col-sm-4">
-      <h3>Column 3</h3> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Stuents</h3> 
+      <p>MYRIAM</p>
+      <p>MARIO</p>
+      <p>PHILIPPE</p>
     </div>
   </div>
 </div>
