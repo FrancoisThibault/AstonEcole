@@ -14,7 +14,8 @@
 
             // On passe par l'API du projet Api
             $("#getStudents").click(function () {
-                $.getJSON("http://localhost:56089/api/Students")
+                // $.getJSON("http://localhost:56089/api/Students")
+                $.getJSON("http://localhost:51767/api/Students")
                     .done(function (data) {
                         // On success, 'data' contains a list of students
                         $.each(data, function (key, item) {

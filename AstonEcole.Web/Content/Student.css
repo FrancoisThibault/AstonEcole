@@ -1,0 +1,26 @@
+﻿body {
+
+   
+}
+
+ div.colValue{
+      background-color: lavenderblush;
+ }
+
+  div.colValue2{
+      background-color: lavenderblush;
+     
+ }
+
+  div.colName{
+      background-color: lavender;
+
+ }
+
+  div.rowDetailStudent{
+       border : 1px  solid  rgb(111,119,151);
+  }
+
+  /*div#divDetailStudent{
+       border : 1px  solid  rgb(82,88,114);
+  }*/
