@@ -7,13 +7,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />    
 </head>
 <body>
     <form id="form1" runat="server">
         <br />
         <br />
+        <button type="button" class="btn btn-lg btn-default">Acceuil</button>
+        <button type="button" class="btn btn-lg btn-primary">Teacher</button> 
+        <button type="button" class="btn btn-lg btn-success">Student</button>
+        <button type="button" class="btn btn-lg btn-info">Course</button>
+        <br />
+        <br />
+        
         <div>
-            <asp:GridView ID="gridTeachers" runat="server" AutoGenerateColumns="False" DataKeyNames="TeacherId" OnSelectedIndexChanged="gridTeachers_SelectedIndexChanged">
+            <asp:GridView ID="gridTeachers" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="False" DataKeyNames="TeacherId" OnSelectedIndexChanged="gridTeachers_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField HeaderText="Id" DataField="TeacherId" />
                     <asp:BoundField HeaderText="Nom" DataField="TeacherName" />
@@ -26,7 +35,7 @@
         <div>
             <asp:HiddenField ID="hidTeacherId" runat="server" />
             <asp:TextBox ID="txtTeacherName" runat="server"></asp:TextBox>
-            <asp:GridView ID="gridCourses" runat="server" AutoGenerateColumns="False" DataKeyNames="CourseId" OnRowDataBound="gridCourses_RowDataBound">
+            <asp:GridView ID="gridCourses" runat="server"  CssClass="table table-hover table-striped" AutoGenerateColumns="False" DataKeyNames="CourseId" OnRowDataBound="gridCourses_RowDataBound">
                 <Columns>
                     <asp:BoundField HeaderText="Nom" DataField="CourseName" />
                     <asp:CheckBoxField HeaderText="Assigné" DataField="IsSelected" ReadOnly="False" />
@@ -37,6 +46,12 @@
 
         <br />
         <span id="monSpan" runat="server"></span>
+
+        <br />
+
+        <a href="TeachersJQ.aspx">TeachersJQ</a>
+        <a href="index.aspx">Index</a>
+
         <br />
             <input type="button" id="getEleves" value="Récupérer les élèves..." />
             <ul id="teachers"></ul>
