@@ -80,6 +80,8 @@
 
             $("td", gridQuery).click(function () {
 
+                $('#details').empty();
+
                 //$("#monSpan").text((this).parentElement.firstElementChild.innerText);
                 var idCours = (this).parentElement.firstElementChild.innerText
 
